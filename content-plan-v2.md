@@ -1,25 +1,29 @@
 # Контент-план «Автоматизация в тапочках» — v2
 
 **Канал**: [@lex_automata](https://t.me/lex_automata)
-**Период**: 1 июня 2026 — 30 августа 2026 (13 недель)
-**Версия**: v2 — после аудита (см. `audit-notes-v2.md`)
+**Период**: 18 мая 2026 — 31 декабря 2026 (~33 недели, ~225 постов)
+**Версия**: v3 — после второго раунда правок (запуск с релонча 18.05, усиление антикейсов, удаление дублей с уже опубликованным)
 
 ---
 
-## Что изменилось с v1
+## Что изменилось с v1 → v3
 
 | Правка | Что сделано |
 |---|---|
+| Период | **Старт с 18 мая 2026** (релонч), идём до 31 декабря |
+| **31 мая — ДР Лекси** | Личный пост-ретро + мини-розыгрыш промпт-кита 🎂 |
 | Конфликты дат (4 шт.) | Разнесены на ±3-7 дней |
 | Дубли тем (3 шт.) | «Эмбеддинги» / «Саммари» / «Душевность» — слиты или перепрофилированы |
 | Перекос «Какой ИИ выбрать?» (~30% плана) | Сокращено до 1 слота (Вт). Освободившиеся слоты заняли новые рубрики |
 | Воскресенье «3 рубрики в одном слоте» | Воскресенье = только Интерактив. Продающее → Чт (чётные недели) |
 | Понедельник монотонный | 4 формата в ротации: словарь / разбор ноды / новости / мини-разбор подписчика |
-| Юридика/деньги/налоги — нет | +7 постов (ФЗ-152, оферта, ИП, налоги, ROI, ценообразование) |
+| Юридика/деньги/налоги — нет | +9 постов (ФЗ-152, оферта, ИП, налоги, ROI, ценообразование, авансы) |
 | Новости индустрии — нет | +13 «дайджест недели» (связка с собственным конвейером Тех-Разведчик) |
-| Сезонные привязки — нет | +5 постов (отпуск, Чёрная пятница, начало учебного года) |
-| Гостевые — нет | +2 совместки запланировано |
-| Серии/марафон — нет | +1 марафон «Соберём ИИ-агента за 7 дней» (август) |
+| Сезонные привязки — нет | +6 постов (релонч, ДР, отпуск, 1 сентября, Чёрная пятница, новогодний чек-лист) |
+| Гостевые — нет | +3 совместки запланировано |
+| Серии/марафон — нет | +1 марафон (август), +1 сериал из 5 эпизодов (октябрь-ноябрь), +«30 нод за 30 дней» (сент-дек) |
+| **Антикейсы усилены** | Было 5 на полугодие → стало **15+ за период**, каждый со своей моралью и цифрами |
+| Удалены из плана | «Как я зашла в автоматизацию» — у тебя уже опубликовано |
 
 ---
 
@@ -98,43 +102,76 @@ flat illustration style, no text on image
 
 # Календарь публикаций
 
+## МАЙ 2026 (старт релонча — 18.05)
+
+**Контекст**: канал перезапускается с расширенным форматом, новые рубрики (📰 Новости, 🧯 Антикейсы как отдельный слот, 🎤 голосовые, серии). Двухнедельный «прогрев» — мягко вводим аудиторию в новую структуру.
+
+| Дата | День | Рубрика | Тема | Формат | Хэштеги | Image-промпт-добавка | Статус |
+|---|---|---|---|---|---|---|---|
+| 18.05 | Пн | 📚 Словарь (W3) | **Релонч**: Что нового в канале — навигатор по рубрикам и хэштегам | Анонс | `#lex_words` | `+ welcome banner, friendly Lexi waving, navigation map glowing` | **NEW** |
+| 19.05 | Вт | 🤖 Какой ИИ | Какой ИИ выбрать в 2026: матрица «задача → модель» (общий обзор) | Гайд | `#lex_ai` | `+ decision matrix grid, robots aligned by category, helpful arrows` | **NEW** |
+| 20.05 | Ср | 🛋 Кейс | Кейс месяца: распределение лидов между менеджерами по загрузке | Кейс | `#lex_cases` | `+ leads flowing to balanced workload meters, even distribution` | **NEW** |
+| 21.05 | Чт (W3, нечёт) | 🧯 Антикейс | **«Workflow, который удалил 1 200 контактов из CRM»** — почему я теперь делаю dry-run | Сторителлинг | `#lex_fail` | `+ contact list shrinking dramatically, recovery snapshot glow` | **NEW** |
+| 22.05 | Пт | 💌 История | Почему я ушла с Zapier навсегда (история перехода) | Пост | `#lex_life` | `+ Zapier logo fading, n8n logo welcoming, cozy switch moment` | **NEW** |
+| 23.05 | Сб | ✨ Туториал | Self-hosted AI-стек 2026: Ollama + LiteLLM + OpenWebUI + n8n (docker-compose) | Туториал | `#lex_tools` | `+ four containers stacking up, harmonious system` | **NEW** |
+| 24.05 | Вс | 🎈 Интерактив | Опрос: «Что у вас уже автоматизировано, а что вручную?» (4 варианта) | Опрос | `#lex_qa` | `+ four scenarios as cards, hands voting` | **NEW** |
+| 25.05 | Пн | 🧰 Разбор ноды (W4) | 5 недооценённых нод n8n: Split In Batches, Merge, Wait, Respond to Webhook, HTML Extract | Гайд | `#lex_tools` | `+ five glowing node icons in a row, schematic style` | **NEW** |
+| 26.05 | Вт | 🤖 Какой ИИ | Прогнала один промпт через 7 моделей — результаты, цена, победитель | Гайд | `#lex_ai #lex_money` | `+ seven robots in a row, one with golden trophy` | **NEW** |
+| 27.05 | Ср | 🛋 Кейс | Бот-продавец в Direct/WhatsApp для селлеров (−80% рутины) | Кейс | `#lex_cases` | `+ phone screen with chat, smiling shop owner in background` | В работе |
+| 28.05 | Чт (W4, чёт) | 🌸 Продающее | Считаем ROI: 8000₽ за workflow vs 40 часов менеджера в месяц | Гайд | `#lex_money` | `+ split: pile of cash on left, exhausted manager on right, equal sign` | **NEW** |
+| 29.05 | Пт | 💌 История | OpenAI vs OpenRouter vs VsegPT vs ProxyAPI — через кого платить из РФ | Гайд | `#lex_money #lex_life` | `+ payment terminals around, contemplating Lexi, ruble + dollar icons` | **NEW** |
+| 30.05 | Сб | ✨ Туториал | Какой ИИ для саммари: 3 кейса (отзывы, вакансии, длинные документы) | Гайд | `#lex_ai` | `+ paper stacks shrinking into one short note` | **NEW** |
+| 31.05 | Вс | 🎈 Интерактив | **🎂 ДР Лекси**: «Год в цифрах канала + что вам подарю» (мини-розыгрыш промпт-кита) | Личное+интерактив | `#lex_life #lex_qa` | `+ birthday cake with code candles, Lexi smiling, gift box opening with promo bundle inside` | **NEW** |
+
+## Месячный итог май
+- Постов: 14 (релонч с 18.05)
+- Главное событие: **31.05 — день рождения** (мини-розыгрыш + ламповый ретро-пост)
+- Зафиксированы все новые слоты и хэштеги
+- Антикейс открывает рубрику громко (потеря 1 200 контактов — цепляет внимание)
+
+---
+
 ## ИЮНЬ 2026
 
 | Дата | День | Рубрика | Тема | Формат | Хэштеги | Image-промпт-добавка | Статус |
 |---|---|---|---|---|---|---|---|
 | 01.06 | Пн | 📚 Словарь (W1) | RAG в одной картинке: библиотека, библиотекарь и ваш вопрос | Пост | `#lex_words #lex_ai` | `+ library shelves with glowing books, librarian holding the right book` | Идея |
 | 02.06 | Вт | 🤖 Какой ИИ | Какой ИИ для кода в Code-ноде n8n — кто лучше пишет JS | Гайд | `#lex_ai` | `+ code editor floating, JavaScript logo glow` | Идея |
-| 03.06 | Ср | 🛋 Кейс | Бот-продавец в Direct/WhatsApp для селлеров | Кейс | `#lex_cases` | `+ phone screen with chat, smiling shop owner in background` | В работе |
-| 04.06 | Чт (W1, нечёт) | 🧯 Антикейс | Workflow, который сломался в самый неподходящий момент (Black Friday-style) | Разбор | `#lex_fail` | `+ falling boxes, panic mode, smoking laptop` | Идея |
-| 05.06 | Пт | 💌 История | OpenAI vs OpenRouter vs VsegPT vs ProxyAPI — через кого платить из РФ | Гайд | `#lex_money #lex_life` | `+ payment terminals around, contemplating Lexi` | Идея |
-| 06.06 | Сб | ✨ Туториал | Какой ИИ для саммари: 3 кейса (отзывы, вакансии, длинные документы) | Гайд | `#lex_ai` | `+ paper stacks shrinking into one short note` | Идея (объединил с 7 июля) |
+| 03.06 | Ср | 🛋 Кейс | Автоответы на отзывы WB/Ozon (продолжение бот-продавца) | Кейс | `#lex_cases` | `+ stars rating, robot typing reply with care` | Идея |
+| 04.06 | Чт (W1, нечёт) | 🧯 Антикейс | **«Workflow поздравил клиентов 1 января в 3:00 ночи»** — таймзоны и Cron | Разбор | `#lex_fail` | `+ clock showing 3am, angry phone notifications, timezone map` | **NEW** (перенос из дек.) |
+| 05.06 | Пт | 💌 История | День в жизни автоматизатора — что я автоматизирую для себя | Пост | `#lex_life` | `+ daily routine collage, chai → laptop → cat → walk` | Идея |
+| 06.06 | Сб | ✨ Туториал | Фото чека → Excel (OCR: Tesseract или GPT-Vision) | Туториал | `#lex_tools` | `+ paper receipt transforming into spreadsheet` | Идея |
 | 07.06 | Вс | 🎈 Интерактив | Опрос: «Какая задача бесит вас больше всего?» | Опрос | `#lex_qa` | `+ question marks floating, four character archetypes` | Идея |
-| 08.06 | Пн | 🧰 Разбор ноды (W2) | 5 недооценённых нод n8n: Split In Batches, Merge, Wait, Respond to Webhook, HTML Extract | Гайд | `#lex_tools` | `+ five glowing node icons in a row, schematic style` | Идея |
-| 09.06 | Вт | 🤖 Какой ИИ | Прогнала один промпт через 7 моделей — результаты, цена, победитель | Гайд | `#lex_ai #lex_money` | `+ seven robots in a row, one with golden trophy` | Идея |
-| 10.06 | Ср | 🛋 Кейс | Автоответы на отзывы WB/Ozon | Кейс | `#lex_cases` | `+ stars rating, robot typing reply with care` | Идея |
-| 11.06 | Чт (W2, чёт) | 🌸 Продающее | Считаем ROI автоматизации: 8000₽ за workflow vs 40 часов менеджера/мес | Гайд | `#lex_money` | `+ split: pile of cash on left, exhausted manager on right, equal sign` | Идея |
+| 08.06 | Пн | 🧰 Разбор ноды (W2) | IF / Switch — маршрутизация workflow на пальцах | Гайд | `#lex_tools #lex_words` | `+ railroad switch, two paths diverging, node icon` | Идея |
+| 09.06 | Вт | 🤖 Какой ИИ | ChatGPT vs Perplexity vs You.com — кто лучше ищет в интернете | Гайд | `#lex_ai` | `+ three search engines as characters, magnifying glasses` | Идея |
+| 10.06 | Ср | 🛋 Кейс | «Цифровой помощник риелтора» (Циан/Авито → TG) | Кейс | `#lex_cases` | `+ apartment cards floating to phone, satisfied client` | Идея |
+| 11.06 | Чт (W2, нечёт) | 🧯 Антикейс | **«Бот спамил клиентов каждые 5 секунд»** — почему дебаунсинг важнее, чем кажется | Разбор | `#lex_fail` | `+ inbox explosion, notifications flooding, then calm filter` | **NEW** (перенос из окт.) |
 | 12.06 | Пт | 💌 История | **Гостевой пост / совместка** (договорись с дружественным каналом) | Совместка | `#lex_life` | `+ two characters at desk together, chai cups, friendly chat` | **NEW** |
-| 13.06 | Сб | ✨ Туториал | Какой ИИ для «живых» историй и кейсов в твоём канале — тест стиля | Гайд | `#lex_ai #lex_life` | `+ four robots writing in different styles, scrolls floating` | Идея (был дубль 13.06+04.08, оставил один) |
+| 13.06 | Сб | ✨ Туториал | Какой ИИ для «живых» историй и кейсов в твоём канале — тест стиля | Гайд | `#lex_ai #lex_life` | `+ four robots writing in different styles, scrolls floating` | Идея |
 | 14.06 | Вс | 🎈 Интерактив | Q&A анонс: «Накидайте вопросы — отвечу на 5 в следующий вторник» | Q&A | `#lex_qa` | `+ open notebook with question marks, friendly invite gesture` | **NEW** |
-| 15.06 | Пн | 📰 Новости (W3, новый формат) | Дайджест недели: что нового в self-hosted AI и n8n | Новости | `#lex_news` | `+ newspaper folding, holographic news cards floating` | **NEW** |
-| 16.06 | Вт | 🤖 Какой ИИ | ChatGPT vs Perplexity vs You.com — кто лучше ищет в интернете | Гайд | `#lex_ai` | `+ three search engines as characters, magnifying glasses` | Идея |
-| 17.06 | Ср | 🛋 Кейс | «Цифровой помощник риелтора» (Циан/Авито → TG) | Кейс | `#lex_cases` | `+ apartment cards floating to phone, satisfied client` | Идея |
-| 18.06 | Чт (W3, нечёт) | 🧯 Антикейс | «Самая дорогая ошибка с токенами» — как сжечь $X за ночь | Разбор | `#lex_fail #lex_money` | `+ tokens flying out of jar, shocked face at bill` | Идея (перенос с 21.05) |
-| 19.06 | Пт | 💌 История | Какой ИИ для перевода «русский ↔ английский» в контексте обучения | Гайд | `#lex_ai` | `+ flags merging, dictionary opening` | Идея |
-| 20.06 | Сб | ✨ Туториал | Фото чека → Excel (OCR: Tesseract или GPT-Vision) | Туториал | `#lex_tools` | `+ paper receipt transforming into spreadsheet` | Идея |
+| 15.06 | Пн | 📰 Новости (W3) | Дайджест недели: что нового в self-hosted AI и n8n | Новости | `#lex_news` | `+ newspaper folding, holographic news cards floating` | **NEW** |
+| 16.06 | Вт | 🤖 Какой ИИ | Какой ИИ для перевода «русский ↔ английский» в контексте обучения | Гайд | `#lex_ai` | `+ flags merging, dictionary opening` | Идея |
+| 17.06 | Ср | 🛋 Кейс | Мониторинг воркфлоу: Uptime Kuma + алерт в Telegram, когда упало | Туториал-кейс | `#lex_tools` | `+ red alarm bell, green checkmarks, dashboard glow` | Идея |
+| 18.06 | Чт (W3, чёт) | 🌸 Продающее | До/после клиента: скрины workflow + цифры экономии часов | Кейс-продающее | `#lex_money #lex_cases` | `+ before/after cleaning montage, hours counter dropping` | Идея |
+| 19.06 | Пт | 💌 История | **Самозанятая или ИП — что выгоднее автоматизатору в 2026** | Пост | `#lex_money #lex_law` | `+ two paths diverging, signs with tax rates` | **NEW** |
+| 20.06 | Сб | ✨ Туториал | **Behind-the-scenes #1**: «Как я собрала кейс по риелтору» — за кадром | Backstage | `#lex_life` | `+ messy desk, multiple monitors, debug screens` | **NEW** |
 | 21.06 | Вс | 🎈 Интерактив | Q&A: ответы на 5 вопросов из понедельника + новый опрос | Q&A | `#lex_qa` | `+ five answer cards spreading on desk` | **NEW** |
-| 22.06 | Пн | 💬 Разбор подписчика (W4, новый формат) | По пятницам разбираю один присланный workflow — формат подачи, как прислать | Объявление | `#lex_qa` | `+ inbox icon, magnifying glass over workflow diagram` | Идея (перенос) |
+| 22.06 | Пн | 💬 Разбор подписчика (W4) | По пятницам разбираю один присланный workflow — формат подачи, как прислать | Объявление | `#lex_qa` | `+ inbox icon, magnifying glass over workflow diagram` | Идея |
 | 23.06 | Вт | 🤖 Какой ИИ | Какой ИИ для аналитики таблиц и Excel — разбор на реальных файлах | Гайд | `#lex_ai` | `+ Excel cells turning into charts, robot pointing at insights` | Идея |
-| 24.06 | Ср | 🛋 Кейс | Мониторинг воркфлоу: Uptime Kuma + алерт в Telegram, когда упало | Туториал-кейс | `#lex_tools` | `+ red alarm bell, green checkmarks, dashboard glow` | Идея |
-| 25.06 | Чт (W4, чёт) | 🌸 Продающее | До/после клиента: скрины workflow + цифры экономии часов | Кейс-продающее | `#lex_money #lex_cases` | `+ before/after cleaning montage, hours counter dropping` | Идея |
-| 26.06 | Пт | 💌 История | День в жизни автоматизатора — что я автоматизирую для себя | Пост | `#lex_life` | `+ daily routine collage, chai → laptop → cat → walk` | Идея |
+| 24.06 | Ср | 🛋 Кейс | AI-подбор репетитора (форма → расписание → бронь) | Кейс | `#lex_cases` | `+ form filling out, calendar slots glowing, handshake` | Идея |
+| 25.06 | Чт (W4, нечёт) | 🧯 Антикейс | **«Самая дорогая ошибка с токенами»** — как сжечь $400 за ночь и как починила | Разбор | `#lex_fail #lex_money` | `+ tokens flying out of jar, shocked face at bill` | Идея |
+| 26.06 | Пт | 💌 История | Что я выкинула из стека за последний год — и почему стало легче | Пост | `#lex_life #lex_tools` | `+ trash bin with logos, lighter backpack glowing` | **NEW** (перенос из сент.) |
 | 27.06 | Сб | ✨ Туториал | Голосовое → задача в Notion/ClickUp (Whisper локально) | Туториал | `#lex_tools` | `+ voice waves transforming into task cards` | Идея |
-| 28.06 | Вс | 🎈 Интерактив | **Голосовой пост / подкаст-пилот**: «История одного workflow» (5 мин) | Аудио | `#lex_voice #lex_life` | `+ headphones, microphone, soft podcast glow` | **NEW** |
+| 28.06 | Вс | 🎈 Интерактив | **Голосовой пост #1**: «История одного workflow» (5 мин) | Аудио | `#lex_voice #lex_life` | `+ headphones, microphone, soft podcast glow` | **NEW** |
+| 29.06 | Пн | 📚 Словарь (W5) | Webhook vs Polling — две философии запуска workflow | Пост | `#lex_words` | `+ two doors: push vs pull, arrows showing direction` | Идея |
+| 30.06 | Вт | 🤖 Какой ИИ | Whisper vs GigaAM vs YandexSpeechKit — кто лучше распознаёт русскую речь | Гайд | `#lex_ai` | `+ three microphones with sound waves` | Идея |
 
 ## Месячный итог июнь
-- Постов: 28 (~6.5/неделю)
-- Распределение: Какой ИИ — 6, Кейсы — 4, Антикейсы — 2, Продающее — 2, Истории — 4, Туториалы — 4, Интерактив — 4, Словарь/Ноды/Новости/Разбор — 4
-- Новые форматы протестированы: дайджест новостей, Q&A, гостевая, голосовой
+- Постов: 30
+- **Антикейсы усилены: 3 шт** (таймзоны Cron, спам-дебаунсинг, потеря токенов) — все с реальными цифрами
+- Удалены дубли с маем (Zapier, Self-hosted стек, OpenRouter, ROI ушли в май)
+- Новые форматы: гостевой #1, голосовой #1, BTS #1, Q&A блок #1
+- Карьерный сторителлинг: «что выкинула из стека», «самозанятая или ИП»
 
 ---
 
@@ -142,44 +179,44 @@ flat illustration style, no text on image
 
 | Дата | День | Рубрика | Тема | Формат | Хэштеги | Image-промпт-добавка | Статус |
 |---|---|---|---|---|---|---|---|
-| 29.06 | Пн | 📚 Словарь (W1) | Бухгалтер-лайт для микробизнеса (концепт + словарик терминов) | Кейс+словарь | `#lex_words #lex_cases` | `+ calculator, receipts, robot accountant friendly` | Идея (объединил с кейсом) |
-| 30.06 | Вт | 🤖 Какой ИИ | Whisper vs GigaAM vs YandexSpeechKit — кто лучше распознаёт русскую речь | Гайд | `#lex_ai` | `+ three microphones with sound waves` | Идея |
 | 01.07 | Ср | 🛋 Кейс | Бухгалтер-лайт: чеки из банка → GPT категоризирует → отчёт | Кейс | `#lex_cases #lex_money` | `+ receipt waterfall into clean categorized table` | Идея |
 | 02.07 | Чт (W1, нечёт) | 🧯 Антикейс | «Когда автоматизация НЕ нужна» — 5 ситуаций, где автоматизировать = только вред | Пост | `#lex_fail` | `+ stop sign, hand gesture, simple human task glow` | Идея |
-| 03.07 | Пт | 💌 История | **NEW**: Самозанятая или ИП — что выгоднее автоматизатору в 2026 | Пост | `#lex_money #lex_law` | `+ two paths diverging, signs with tax rates` | **NEW** |
-| 04.07 | Сб | ✨ Туториал | **NEW** Behind-the-scenes #1: «Как я собрала кейс по риелтору» — за кадром | Backstage | `#lex_life` | `+ messy desk, multiple monitors, debug screens` | **NEW** |
+| 03.07 | Пт | 💌 История | **Автоматизация в отпуск**: 5 настроек, чтобы клиенты не паниковали без вас | Пост | `#lex_life` | `+ vacation hat on laptop, auto-replies glowing, beach in background` | **NEW** (сезонный) |
+| 04.07 | Сб | ✨ Туториал | Автобронь встреч через Calendly + AI | Туториал | `#lex_tools` | `+ calendar with auto-filling slots, smooth flow` | Идея |
 | 05.07 | Вс | 🎈 Интерактив | «Расскажи про свою задачу — подберём модель» (интерактив в комментах) | Интерактив | `#lex_qa #lex_ai` | `+ chat bubbles flying, helpful gesture` | Идея |
-| 06.07 | Пн | 🧰 Разбор ноды (W2) | Cron и Trigger — кто будит ваши воркфлоу по утрам | Пост | `#lex_words #lex_tools` | `+ alarm clock with workflow gears, sunrise` | Идея (перенос с 03.08) |
+| 06.07 | Пн | 📚 Словарь (W1) | Бухгалтер-лайт для микробизнеса: словарик финансовых терминов | Словарь | `#lex_words #lex_money` | `+ calculator, receipts, robot accountant friendly` | Идея |
 | 07.07 | Вт | 🤖 Какой ИИ | Какой ИИ для Telegram-бота поддержки — скорость ответа важнее всего | Гайд | `#lex_ai` | `+ stopwatch, fast typing robot, satisfied user` | Идея |
 | 08.07 | Ср | 🛋 Кейс | AI-подбор репетитора (форма → расписание → бронь) | Кейс | `#lex_cases` | `+ form filling out, calendar slots glowing, handshake` | Идея |
-| 09.07 | Чт (W2, чёт) | 🌸 Продающее | **NEW**: Как я считаю стоимость workflow — формула + примеры | Гайд | `#lex_money` | `+ formula on chalkboard, clean math, cozy` | **NEW** |
+| 09.07 | Чт (W2, чёт) | 🌸 Продающее | **Как я считаю стоимость workflow** — формула + примеры | Гайд | `#lex_money` | `+ formula on chalkboard, clean math, cozy` | **NEW** |
 | 10.07 | Пт | 💌 История | «Утро автоматизатора»: как выглядит мой день | Пост | `#lex_life` | `+ morning routine: tea, pet, laptop, journal` | Идея |
-| 11.07 | Сб | ✨ Туториал | Автобронь встреч через Calendly + AI | Туториал | `#lex_tools` | `+ calendar with auto-filling slots, smooth flow` | Идея (перенос с 04.07) |
+| 11.07 | Сб | ✨ Туториал | Cron и Trigger — кто будит ваши воркфлоу по утрам (с примерами cron-выражений) | Туториал | `#lex_words #lex_tools` | `+ alarm clock with workflow gears, sunrise` | Идея |
 | 12.07 | Вс | 🎈 Интерактив | Q&A анонс #2: «Что хочется узнать про самозанятость и налоги» | Q&A | `#lex_qa #lex_money` | `+ tax form, calculator, friendly invite` | **NEW** |
 | 13.07 | Пн | 📰 Новости (W3) | Дайджест недели: новые модели и инструменты автоматизации | Новости | `#lex_news` | `+ news feed scrolling, hot takes glow` | **NEW** |
 | 14.07 | Вт | 🤖 Какой ИИ | Reasoning-модели (o3, DeepSeek-R1, Claude Thinking): когда брать, а когда слив токенов | Гайд | `#lex_ai #lex_money` | `+ thinking robot with gears visible, token meter` | Идея |
 | 15.07 | Ср | 🛋 Кейс | Автоворонка для инфобиза в Telegram | Кейс | `#lex_cases` | `+ funnel with leads filtering down, hot ones glowing` | Идея |
-| 16.07 | Чт (W3, нечёт) | 🧯 Антикейс | «Workflow, который делал больше вреда, чем пользы» (расширенная версия) | Разбор | `#lex_fail` | `+ overthinking robot, manual task simpler glow` | Идея |
+| 16.07 | Чт (W3, нечёт) | 🧯 Антикейс | **«Когда AI-агент отвечал клиентам вместо меня — и что пошло не так»** | Разбор | `#lex_fail #lex_ai` | `+ rogue robot sending wrong messages, owner facepalm` | **NEW** |
 | 17.07 | Пт | 💌 История | Как не попасть на лимиты маркетплейсов: Wait + Rate Limit + очереди | Туториал | `#lex_tools` | `+ traffic light system, queue of requests, calm flow` | Идея |
 | 18.07 | Сб | ✨ Туториал | «Развенчаем мифы»: «GigaChat хуже», «DeepSeek всё выкачает», «локалка = бесплатно» | Гайд | `#lex_ai` | `+ three myths bursting like soap bubbles` | Идея |
 | 19.07 | Вс | 🎈 Интерактив | Q&A ответы #2: налоги, ИП, ценообразование — ответы на вопросы из понедельника | Q&A | `#lex_qa #lex_money` | `+ five answer cards on tax theme` | **NEW** |
-| 20.07 | Пн | 💬 Разбор подписчика (W4) | Первый разбор присланного workflow от подписчика (если будут заявки) | Разбор | `#lex_qa` | `+ workflow under magnifying glass, post-its with notes` | Идея |
+| 20.07 | Пн | 💬 Разбор подписчика (W4) | Первый разбор присланного workflow от подписчика | Разбор | `#lex_qa` | `+ workflow under magnifying glass, post-its with notes` | Идея |
 | 21.07 | Вт | 🤖 Какой ИИ | Парсер тендеров/госзакупок (утренние карточки) — какой ИИ для парсинга | Гайд+кейс | `#lex_ai #lex_cases` | `+ documents flying, structured cards on phone screen` | Идея |
-| 22.07 | Ср | 🛋 Кейс | **NEW**: «Передача проекта клиенту» — кейс безболезненной передачи workflow | Кейс | `#lex_cases #lex_law` | `+ documentation handover, two hands meeting` | **NEW** |
-| 23.07 | Чт (W4, чёт) | 🌸 Продающее | 5 бесплатных инструментов для селлера WB/Ozon, которые дружат с n8n | Гайд | `#lex_tools` | `+ five tool icons, marketplaces glow, cost-free badge` | Идея |
-| 24.07 | Пт | 💌 История | Почему я ушла с Zapier навсегда | Пост | `#lex_life` | `+ Zapier logo fading, n8n logo welcoming, cozy switch` | Идея |
-| 25.07 | Сб | ✨ Туториал | Self-hosted AI-стек 2026: Ollama + LiteLLM + OpenWebUI + n8n (docker-compose) | Туториал | `#lex_tools` | `+ four containers stacking up, harmonious system` | Идея |
+| 22.07 | Ср | 🛋 Кейс | **«Передача проекта клиенту»** — кейс безболезненной передачи workflow + документация | Кейс | `#lex_cases #lex_law` | `+ documentation handover, two hands meeting` | **NEW** |
+| 23.07 | Чт (W4, нечёт) | 🧯 Антикейс | **«Workflow, который делал больше вреда, чем пользы»** (Black-Friday-style) | Сторителлинг | `#lex_fail` | `+ falling boxes, panic mode, smoking laptop` | Идея |
+| 24.07 | Пт | 💌 История | 5 бесплатных инструментов для селлера WB/Ozon, которые дружат с n8n | Гайд | `#lex_tools` | `+ five tool icons, marketplaces glow, cost-free badge` | Идея |
+| 25.07 | Сб | ✨ Туториал | MCP + n8n: подключаем Model Context Protocol (даём агенту доступ к БД) | Туториал | `#lex_tools` | `+ protocol bridge between AI and database, glowing connection` | Идея |
 | 26.07 | Вс | 🎈 Интерактив | 10 задач, которые автоматизирую за 3 дня (мини-прайс с примерами) | Прайс-интерактив | `#lex_money` | `+ menu of tasks, prices on small tags` | Идея |
-| 27.07 | Пн | 📚 Словарь | Альтернативы n8n: Activepieces, Windmill, Flowise — кому подойдут | Гайд | `#lex_tools #lex_words` | `+ four similar but distinct tool characters` | Идея (перенос с 27.07 — корректно) |
+| 27.07 | Пн | 🧰 Разбор ноды (W5) | Альтернативы n8n: Activepieces, Windmill, Flowise — кому подойдут | Гайд | `#lex_tools #lex_words` | `+ four similar but distinct tool characters` | Идея |
 | 28.07 | Вт | 🤖 Какой ИИ | Как правильно читать бенчмарки моделей — почему MMLU и Arena не про ваш бизнес | Гайд | `#lex_ai` | `+ benchmark charts with skeptical look, real-world test glow` | Идея |
-| 29.07 | Ср | 🛋 Кейс | **NEW**: Конкурс — «Опиши свой процесс, один соберу бесплатно» (старт) | Конкурс-кейс | `#lex_qa` | `+ trophy, friendly competition vibe, three contestants` | Идея (перенос с 31.05) |
-| 30.07 | Чт (W5, нечёт) | 🧯 Антикейс | **NEW**: «Пять моих самых больших факапов в self-hosted» | Разбор | `#lex_fail` | `+ five small disasters in cute illustration style` | **NEW** |
+| 29.07 | Ср | 🛋 Кейс | **Конкурс — «Опиши свой процесс, один соберу бесплатно»** (старт) | Конкурс-кейс | `#lex_qa` | `+ trophy, friendly competition vibe, three contestants` | **NEW** |
+| 30.07 | Чт (W5, чёт) | 🌸 Продающее | **«Пять моих самых больших факапов в self-hosted»** (антикейс-продающее: «и как помогаю вам не повторить») | Разбор+продажи | `#lex_fail #lex_money` | `+ five small disasters in cute illustration style, then helping hand` | **NEW** |
 | 31.07 | Пт | 💌 История | **Голосовой пост #2**: «Open Source или проприетарная — мои 3 года опыта» | Аудио | `#lex_voice #lex_ai` | `+ podcast setup, headphones, vinyl-like vibe` | **NEW** |
 
 ## Месячный итог июль
-- Постов: 30
-- Новые: самозанятость/налоги, behind-the-scenes #1, голосовой #2, Q&A блок про деньги, передача проекта
-- Серии запущены: дайджест #2, Q&A #2
+- Постов: 31
+- **Антикейсы усилены: 3 шт** (когда автоматизация не нужна, AI-агент отвечал не туда, Black Friday Workflow) + 1 «продающий антикейс» 30.07
+- Сезонный пост 03.07 про автоматизацию в отпуск
+- Удалены дубли: «Whisper vs GigaAM» (был 30.06), «Самозанятая или ИП» (ушёл в июнь), «Zapier» (ушёл в май), «Self-hosted стек» (ушёл в май), «BTS #1» (ушёл в июнь)
+- Добавлены: MCP+n8n (был в августе, перенёс ближе)
 
 ---
 
@@ -187,14 +224,14 @@ flat illustration style, no text on image
 
 | Дата | День | Рубрика | Тема | Формат | Хэштеги | Image-промпт-добавка | Статус |
 |---|---|---|---|---|---|---|---|
-| 01.08 | Сб | ✨ Туториал | MCP + n8n (подключаем Model Context Protocol) | Туториал | `#lex_tools` | `+ protocol bridge between AI and database, glowing connection` | Идея |
+| 01.08 | Сб | ✨ Туториал | Свой кастомный GPT на базе n8n + RAG (с UI и логами) | Туториал | `#lex_tools` | `+ custom interface mockup, RAG flow visualization` | Идея |
 | 02.08 | Вс | 🎈 Интерактив | До/после клиента: скрины workflow + цифры экономии часов (карусель) | Кейс-продажи | `#lex_money #lex_cases` | `+ before/after split, hours saved counter` | Идея |
 | 03.08 | Пн | 📚 Словарь (W1) | **NEW**: Эмбеддинги vs Vector Store — чем отличаются (на примере шкафа с полочками) | Пост | `#lex_words #lex_ai` | `+ wardrobe with labeled shelves, items finding their slot` | **NEW** (перепрофилирован дубль) |
 | 04.08 | Вт | 🤖 Какой ИИ | Какой ИИ для парсинга и структурирования JSON — где function calling адекватный | Гайд | `#lex_ai` | `+ messy text turning into clean JSON tree` | Идея |
 | 05.08 | Ср | 🛋 Кейс | Анализ причин возвратов на маркетплейсах | Кейс | `#lex_cases` | `+ return packages clustering into reason buckets` | Идея |
 | 06.08 | Чт (W1, нечёт) | 🧯 Антикейс | Как я потеряла 20 workflow за одну ночь (и что спасло бы меня) — расширенная | Сторителлинг | `#lex_fail` | `+ candle going out, then backup glowing rescue` | Идея |
 | 07.08 | Пт | 💌 История | «Тапочные» автоматизации дома: напоминалки, умный свет, траты в семейный чат | Пост | `#lex_life` | `+ cozy home, lights on schedule, family chat glow` | Идея |
-| 08.08 | Сб | ✨ Туториал | Свой кастомный GPT на базе n8n + RAG (с UI и логами) | Туториал | `#lex_tools` | `+ custom interface mockup, RAG flow visualization` | Идея |
+| 08.08 | Сб | ✨ Туториал | **Behind-the-scenes #2**: как я выбираю и тестирую новый AI-инструмент (мой процесс ревью) | Backstage | `#lex_life #lex_tools` | `+ messy desk, multiple monitors, comparison notes everywhere` | **NEW** |
 | 09.08 | Вс | 🎈 Интерактив | Опрос: «На каком вы этапе автоматизации?» (новичок/уже n8n/уже AI/агенты) | Опрос | `#lex_qa` | `+ four growth stages of a plant, choose your level` | Идея |
 | 10.08 | Пн | 🧰 Разбор ноды (W2) | **NEW**: Code-нода в n8n — когда писать JS, когда не стоит | Гайд | `#lex_tools` | `+ code editor with friendly cursor, decision tree` | **NEW** |
 | 11.08 | Вт | 🤖 Какой ИИ | Какой ИИ для карточек товара WB/Ozon — 4 модели side-by-side + цена | Гайд | `#lex_ai #lex_cases` | `+ four product cards with subtle differences, price tags` | Идея |
@@ -320,9 +357,9 @@ flat illustration style, no text on image
 | 07.09 | Пн | 📚 Словарь (W1) | Webhook vs Polling — две философии запуска workflow | Пост | `#lex_words` | `+ two doors: push vs pull, arrows showing direction` | Идея |
 | 08.09 | Вт | 🤖 Какой ИИ | Какой ИИ для генерации учебных материалов — тесты, конспекты, карточки | Гайд | `#lex_ai` | `+ flashcards and quizzes generating from one prompt` | Идея |
 | 09.09 | Ср | 🛋 Кейс | Автосбор отзывов с курса → анализ тональности → отчёт для продюсера | Кейс | `#lex_cases` | `+ reviews flowing into sentiment chart, green/red buckets` | Идея |
-| 10.09 | Чт (W1, нечёт) | 🧯 Антикейс | «Когда AI-агент отвечал клиентам вместо меня — и что пошло не так» | Разбор | `#lex_fail #lex_ai` | `+ rogue robot sending wrong messages, owner facepalm` | Идея |
-| 11.09 | Пт | 💌 История | Что я выкинула из стека за последний год — и почему стало легче | Пост | `#lex_life #lex_tools` | `+ trash bin with logos, lighter backpack glowing` | Идея |
-| 12.09 | Сб | ✨ Туториал | **Behind-the-scenes #2**: как я собираю дайджест новостей за 15 минут (конвейер Тех-Разведчик) | Backstage | `#lex_life #lex_news` | `+ messy desk, multiple monitors, news pipeline visible` | **NEW** |
+| 10.09 | Чт (W1, нечёт) | 🧯 Антикейс | **«Скрипт, который удалил данные клиента»** — почему dev-окружение и dry-run обязательны | Разбор | `#lex_fail` | `+ delete button glowing red, safety net appearing too late` | **NEW** |
+| 11.09 | Пт | 💌 История | Книги, каналы и подкасты, от которых я заряжаюсь как автоматизатор | Подборка | `#lex_life` | `+ bookshelf glowing, headphones, podcast icons floating` | Идея |
+| 12.09 | Сб | ✨ Туториал | **Behind-the-scenes #3**: как я собираю дайджест новостей за 15 минут (конвейер Тех-Разведчик) | Backstage | `#lex_life #lex_news` | `+ messy desk, multiple monitors, news pipeline visible` | **NEW** |
 | 13.09 | Вс | 🎈 Интерактив | Q&A анонс #4: «Что хотите знать про серию 30 нод?» | Q&A | `#lex_qa` | `+ notebook with questions, nodes queue waiting` | Идея |
 | 14.09 | Пн | 🧰 Разбор ноды (W2) | 30 нод — день 2: IF / Switch — маршрутизация workflow | Серия | `#lex_tools` | `+ railroad switch, two paths diverging, node icon` | **NEW** |
 | 15.09 | Вт | 🤖 Какой ИИ | ИИ для автоматической расшифровки вебинаров — Whisper vs AssemblyAI vs Deepgram | Гайд | `#lex_ai` | `+ webinar recording transforming into text transcript` | Идея |
@@ -334,7 +371,7 @@ flat illustration style, no text on image
 | 21.09 | Пн | 📰 Новости (W3) | Дайджест недели: новинки n8n 1.6x, обновления OpenAI, тренды self-hosted | Новости | `#lex_news` | `+ newspaper hologram, three hot news cards` | Идея |
 | 22.09 | Вт | 🤖 Какой ИИ | Какой ИИ для автоответов в мессенджерах — latency, качество, цена | Гайд | `#lex_ai` | `+ chat interface, speed meter, three AI avatars racing` | Идея |
 | 23.09 | Ср | 🛋 Кейс | Автоматизация HR: сбор резюме → скоринг → уведомление рекрутеру | Кейс | `#lex_cases` | `+ resume stack filtering, top candidates glowing green` | Идея |
-| 24.09 | Чт (W3, нечёт) | 🧯 Антикейс | «Скрипт, который удалил данные клиента» — почему тестовая среда обязательна | Разбор | `#lex_fail` | `+ delete button glowing red, safety net appearing too late` | Идея |
+| 24.09 | Чт (W3, нечёт) | 🧯 Антикейс | **«Когда workflow стал Франкенштейном»** — рефакторинг 200-нодного монстра | Разбор | `#lex_fail` | `+ monster workflow tangled, then clean version beside` | **NEW** |
 | 25.09 | Пт | 💌 История | **Голосовой пост #4**: «Месяц серии 30 нод — что я поняла про контент» | Аудио | `#lex_voice #lex_life` | `+ headphones, microphone, reflective mood, autumn window` | **NEW** |
 | 26.09 | Сб | ✨ Туториал | 30 нод — день 4: Wait + Respond to Webhook (асинхронные процессы) | Серия | `#lex_tools` | `+ hourglass, async arrows, patient robot waiting` | **NEW** |
 | 27.09 | Вс | 🎈 Интерактив | «Собери workflow из 3 нод» — интерактивная задачка в комментах | Игра | `#lex_qa #lex_tools` | `+ puzzle pieces, three nodes to connect, playful challenge` | Идея |
@@ -365,7 +402,7 @@ flat illustration style, no text on image
 | 05.10 | Пн | 📚 Словарь (W1) | API Rate Limit — почему сервисы говорят «подожди» и как с этим жить | Пост | `#lex_words` | `+ traffic light at API gate, queue of requests waiting politely` | Идея |
 | 06.10 | Вт | 🤖 Какой ИИ | Какой ИИ для генерации изображений к постам — DALL-E 3 vs Flux vs Midjourney | Гайд | `#lex_ai` | `+ three canvases with different art styles, palette comparison` | Идея |
 | 07.10 | Ср | 🛋 Кейс | **Сериал эп.1**: «Автоматизируем event-агентство» — знакомство с проектом и ТЗ | Серия | `#lex_cases` | `+ episode 1 badge, event agency office, project board` | **NEW** |
-| 08.10 | Чт (W1, нечёт) | 🧯 Антикейс | «Когда workflow стал Франкенштейном» — рефакторинг 200-нодного монстра | Разбор | `#lex_fail` | `+ monster workflow tangled, then clean version beside` | Идея |
+| 08.10 | Чт (W1, нечёт) | 🧯 Антикейс | **«Кейс с прода: webhook улетел в бесконечный цикл и сжёг 200к запросов»** | Разбор | `#lex_fail #lex_money` | `+ infinite loop arrows, counter spinning to 200k, panic` | **NEW** |
 | 09.10 | Пт | 💌 История | Самое глупое, что я делала с n8n в первый месяц | Сторителлинг | `#lex_life #lex_fail` | `+ beginner mistakes montage, facepalm to laughter evolution` | Идея |
 | 10.10 | Сб | ✨ Туториал | **Behind-the-scenes #3**: как я оцениваю проект клиента за 30 минут | Backstage | `#lex_life #lex_money` | `+ messy desk, timer running, estimation notes everywhere` | **NEW** |
 | 11.10 | Вс | 🎈 Интерактив | Q&A анонс #5: «Вопросы про ценообразование и работу с клиентами» | Q&A | `#lex_qa #lex_money` | `+ question inbox, money-themed friendly cards` | Идея |
@@ -379,7 +416,7 @@ flat illustration style, no text on image
 | 19.10 | Пн | 📰 Новости (W3) | Дайджест недели: что нового в мире no-code и AI-агентов | Новости | `#lex_news` | `+ news ticker, autumn theme, pumpkin accent` | Идея |
 | 20.10 | Вт | 🤖 Какой ИИ | Какой ИИ для работы с PDF — извлечение данных, суммаризация, Q&A по документу | Гайд | `#lex_ai` | `+ PDF pages opening, data extracting into cards` | Идея |
 | 21.10 | Ср | 🛋 Кейс | **Сериал эп.3**: Event-агентство — интеграция с оплатой и календарём | Серия | `#lex_cases` | `+ episode 3 badge, payment flow + calendar sync` | **NEW** |
-| 22.10 | Чт (W3, нечёт) | 🧯 Антикейс | «Автоматизация, которая спамила клиентов» — урок про дебаунсинг | Разбор | `#lex_fail` | `+ inbox explosion, notifications flooding, then calm filter` | Идея |
+| 22.10 | Чт (W3, нечёт) | 🧯 Антикейс | **«Не проверила лимит API — счёт за месяц вырос в 5 раз»** — мониторинг расходов | Разбор | `#lex_fail #lex_money` | `+ usage meter spiking, bill exploding, alarm icon` | **NEW** |
 | 23.10 | Пт | 💌 История | Прайс vs «обсудим индивидуально» — что лучше работает (мой опыт) | Пост | `#lex_money #lex_life` | `+ two doors: fixed price vs custom, weighing scale` | Идея |
 | 24.10 | Сб | ✨ Туториал | 30 нод — день 8: Error Trigger + Stop and Error (обработка ошибок) | Серия | `#lex_tools` | `+ safety net catching errors, alarm to calm transition` | **NEW** |
 | 25.10 | Вс | 🎈 Интерактив | Мем-воскресенье: «Типы клиентов глазами автоматизатора» (карусель) | Мем | `#lex_qa #lex_life` | `+ character types gallery, funny archetypes` | Идея |
@@ -456,7 +493,7 @@ flat illustration style, no text on image
 |---|---|---|---|---|---|---|---|
 | 01.12 | Вт | 🤖 Какой ИИ | Какой ИИ для подготовки годового отчёта — суммаризация, визуализация, выводы | Гайд | `#lex_ai` | `+ annual report generating, charts and summaries appearing` | Идея |
 | 02.12 | Ср | 🛋 Кейс | Кейс: автоматическое поздравление клиентов с Новым годом (персонализация + расписание) | Кейс | `#lex_cases` | `+ holiday cards personalizing, scheduling queue, festive glow` | **NEW** |
-| 03.12 | Чт (W1, нечёт) | 🧯 Антикейс | «Workflow, который поздравил клиентов 1 января в 3 часа ночи» — тайм-зоны и Cron | Разбор | `#lex_fail` | `+ clock showing 3am, angry phone notifications, timezone map` | Идея |
+| 03.12 | Чт (W1, нечёт) | 🧯 Антикейс | **«Бэкап делался каждую ночь — но я не проверяла, что он восстанавливается»** | Сторителлинг | `#lex_fail` | `+ backup tape collection, then panic when restoring fails` | **NEW** |
 | 04.12 | Пт | 💌 История | Мои новогодние ритуалы: как я закрываю год и готовлю план на следующий | Пост | `#lex_life` | `+ journal with yearly review, cozy candles, planning board` | Идея |
 | 05.12 | Сб | ✨ Туториал | 30 нод — день 14: Email Node (IMAP/SMTP — мониторинг почты и авто-ответы) | Серия | `#lex_tools` | `+ email envelope opening, auto-reply sending, inbox organizing` | **NEW** |
 | 06.12 | Вс | 🎈 Интерактив | Опрос: «Что вы хотите автоматизировать в 2027?» (планирование) | Опрос | `#lex_qa` | `+ crystal ball with 2027, wish list floating` | Идея |
@@ -495,7 +532,33 @@ flat illustration style, no text on image
 
 ---
 
-# Итого за полугодие (июль — декабрь 2026)
+## Антикейсы (полный список — серия #lex_fail)
+
+Антикейсы — самая ценная и редкая рубрика в нише, дают доверие выше любых регалий. Полный список за период (15 шт., все с уникальной моралью):
+
+| Дата | Антикейс | Урок |
+|---|---|---|
+| 21.05 | Удалила 1 200 контактов из CRM | dry-run перед production |
+| 04.06 | Поздравил клиентов 1 января в 3:00 ночи | таймзоны в Cron |
+| 11.06 | Бот спамил каждые 5 секунд | дебаунсинг и rate limit |
+| 25.06 | Сожгла $400 на токенах за ночь | мониторинг трат на API |
+| 02.07 | Когда автоматизация НЕ нужна (5 ситуаций) | здравый смысл |
+| 16.07 | AI-агент отвечал клиентам не туда | логирование + human-in-the-loop |
+| 23.07 | Workflow делал больше вреда (Black Friday) | мониторинг качества, не только uptime |
+| 30.07 | 5 моих самых больших факапов в self-hosted | антикейс-продающее, доверие |
+| 06.08 | Потеряла 20 workflow за одну ночь | бэкапы + версионирование |
+| 03.09 | Рассылка ушла дважды (10к человек) | идемпотентность Cron |
+| 24.09 | Workflow стал Франкенштейном | рефакторинг, ограничение сложности |
+| 01.10 | Клиент пропал после ТЗ | оферта + аванс |
+| 08.10 | Webhook улетел в бесконечный цикл, 200к запросов | защита от циклов |
+| 22.10 | Не проверила лимит API — счёт ×5 | алерты на превышение |
+| 05.11 | Скидка на Чёрную пятницу применилась к премиум | тест перед сезоном |
+| 19.11 | Хранение клиентских данных в облаке (штраф) | ФЗ-152 + DPA |
+| 03.12 | Бэкап не восстанавливался | проверка восстановления, не только создания |
+| 10.12 | Бот обещал скидки, которых нет | согласование с маркетингом |
+| 24.12 | Топ-5 провалов 2026 (ретро года) | честность + рост |
+
+> **Важно**: антикейсы по слоту — Чт нечётные недели. В планах 4 «продающих антикейса» (когда после факапа идёт CTA про услуги) и **никаких выдуманных историй**. Если какой-то факап у тебя ещё не случился — двигай дату или меняй тему.
 
 ## Общая статистика
 - **Всего постов**: ~182 (июль: 30, август: 30, сентябрь: 30, октябрь: 31, ноябрь: 30, декабрь: 31)
