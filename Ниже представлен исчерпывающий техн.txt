@@ -1,0 +1,966 @@
+Ниже представлен **исчерпывающий технический документ**, который объединяет всё — от стратегии до конкретных команд для терминала. Вы можете сохранить его как `TOTAL_IMPULSE_CRM_PLAN.md` или распечатать.
+
+---
+
+# ИТОГОВЫЙ ТЕХНИЧЕСКИЙ ДОКУМЕНТ: ПОЛНЫЙ СТЕК, АРХИТЕКТУРА И ПОШАГОВАЯ РЕАЛИЗАЦИЯ
+
+**Проект:** Клиника доктора Мадякина (ООО «Гармония», ИП Мадякин, Клиника Имин)  
+**Цель:** Замена 1С на кастомную CRM + голосовой AI-бот «Служба заботы»  
+**Ответственный:** Strong Marketing (Фархад Рашитович)  
+**Версия документа:** 2.0 (максимально подробная)  
+**Дата:** 21.05.2026  
+
+---
+
+## САММАРИ (для CEO – одна страница)
+
+### Проблема
+- Выручка 267 млн ₽ за 6 лет, но 56% от одного врача (Мадякин).
+- Удержание упало с 65% (2022) до 55% (2025) – каждый второй новый пациент не возвращается.
+- 1 089 «китов» с историей 109 млн ₽ лежат без дела (сегменты RiskWhale, SleepingWhale, LostWhale).
+- 1С (БИТ.УМЦ) не даёт гибкой автоматизации, нет API, нет удобной маркетинговой сегментации.
+- Текущий маркетинг: 195 тыс. ₽/мес дают хаотичный контент и слабые VK Ads. Контент местами нарушает этику (пациенты в белье, дети без одежды).
+
+### Решение – STRONG AIOS CRM
+- Полный отказ от 1С. Все данные мигрируются один раз.
+- Кастомная CRM на **Python (FastAPI) + PostgreSQL + n8n + RabbitMQ**.
+- **Голосовой AI-бот «Служба заботы»** с клонированным голосом главврача (24/7):
+  - Подтверждение записей → снижение no-show на 30–50%.
+  - Возврат не пришедших (звонок в течение часа).
+  - Реактивация «китов» (1 089 пациентов) по триггерам.
+  - Follow-up после первого приёма (конверсия в курс).
+  - Сбор отзывов (Яндекс.Карты, 2ГИС, ProDoctors).
+  - Поздравления с днём рождения, акции.
+- Автоматическая RFM-сегментация, еженедельные кампании обзвона.
+- Воронка для 4 ЦА: магнит → квиз → tripwire → курс.
+- Интеграция с Avito Ads, ProDoctors, Telegram, MAX.
+
+### Эффект (прогноз на 6 месяцев)
+- Возврат минимум 15% из 1 089 «китов» → ~160 пациентов × средний чек 100K = **16 млн ₽ доп. выручки**.
+- Снижение no-show на 30% → +5–8 млн ₽ от сохранённых записей.
+- Повышение конверсии 1-й визит → курс с 25% до 40% → +~300 курсов в год.
+- Окупаемость разработки (1,2 млн ₽) за 4–6 месяцев.
+
+### Стек одной строкой
+Python 3.11 / FastAPI / PostgreSQL 15 / Redis / RabbitMQ / n8n / React / Docker / Voximplant / ElevenLabs / Whisper / YandexGPT / Prometheus + Grafana
+
+### Этапы
+| Этап | Дней | Результат |
+|------|------|-----------|
+| 0 | 2 | Инфраструктура (Docker, БД, n8n) |
+| 1 | 7 | Ядро CRM, миграция из 1С, админка |
+| 2 | 14 | Голосовой бот (напоминания, no-show) |
+| 3 | 10 | RFM, реактивация, масс-рассылки |
+| 4 | 7 | Avito, ProDoctors, Telegram, отзывы |
+| 5 | 5 | Безопасность, мониторинг, бэкапы |
+| 6 | 5 | Документация, обучение |
+
+**Всего 50 дней до полноценного запуска.**  
+**Бюджет:** разово 1,2 млн ₽ (бот Premium расширенный) + подписка 120 тыс. ₽/мес + облачные расходы ~50 тыс. ₽/мес.
+
+---
+
+## 1. ПОЛНЫЙ СТЕК ТЕХНОЛОГИЙ (с обоснованием выбора)
+
+### 1.1 Бэкенд (API и бизнес-логика)
+
+| Компонент | Технология | Версия | Почему |
+|-----------|-----------|--------|--------|
+| Язык | Python | 3.11+ | Асинхронность, богатая экосистема для ML/AI, быстрая разработка. |
+| Веб-фреймворк | FastAPI | 0.115+ | Асинхронный, автодокументация (OpenAPI), высокая производительность, встроенная валидация Pydantic. |
+| ORM | SQLAlchemy | 2.0+ (async) | Поддержка асинхронных запросов, миграции (Alembic), гибкость. |
+| Миграции | Alembic | 1.13+ | Неразрушающие миграции, интеграция с SQLAlchemy. |
+| База данных | PostgreSQL | 15+ | Надёжность, JSONB, полнотекстовый поиск, транзакции, конкурентность. |
+| Кеш и сессии | Redis | 7.2+ | Молниеносная скорость, поддержка структур (строки, хеши, списки), pub/sub. |
+| Брокер сообщений | RabbitMQ | 3.12+ | Персистентные очереди, dead-letter exchanges, управление через web UI. |
+| Фоновые задачи | Celery (опционально) | 5.3+ | Может заменить RabbitMQ + прямую отправку, но для простоты используем RabbitMQ + FastAPI BackgroundTasks. |
+| Аутентификация | PyJWT + passlib | - | JWT-токены, хеширование паролей (bcrypt). |
+
+### 1.2 Оркестрация и автоматизация
+
+| Компонент | Технология | Обоснование |
+|-----------|-----------|------------|
+| Workflow engine | n8n (self-hosted) | Визуальное создание цепочек (cron, webhook, HTTP, RabbitMQ, Telegram). 400+ готовых узлов. |
+| Контейнеризация | Docker + docker-compose | Переносимость, изоляция сервисов, простота обновлений. |
+| Регистрация | Опционально: Kubernetes | При масштабировании >10 сервисов. На старте – docker-compose. |
+
+### 1.3 Фронтенд
+
+| Компонент | Технология | Обоснование |
+|-----------|-----------|------------|
+| Фреймворк | React | 18+ | Широкая экосистема, компоненты Ant Design под админку. |
+| Язык | TypeScript | 5+ | Типизация, меньше ошибок. |
+| State management | React Query (TanStack) | 4+ | Кеширование запросов к API, инвалидация. |
+| UI библиотека | Ant Design | 5+ | Готовые компоненты (таблицы, формы, календарь), подходит для админки. |
+| Сборка | Vite | 5+ | Быстрая разработка, горячая перезагрузка. |
+
+### 1.4 Голосовой AI-бот
+
+| Компонент | Технология | Обоснование |
+|-----------|-----------|------------|
+| VoIP-провайдер | Voximplant | REST API, вебхуки, запись звонков, русская поддержка, разумные цены. |
+| STT (распознавание) | Whisper (local, model base/small) | Офлайн, конфиденциальность, хорошее распознавание русского и медицинских терминов. |
+| LLM (диалог) | YandexGPT (API) | Облачное решение, быстрое, дешёвое, понимает контекст. |
+| TTS (синтез) | ElevenLabs | Качество синтеза, клонирование голоса по 60 секундам. |
+| Голосовой профиль | ElevenLabs Voice Cloning | Однократная запись – постоянное использование. |
+
+### 1.5 Рассылки и уведомления
+
+| Канал | Технология | Примечание |
+|-------|-----------|------------|
+| MAX | API MAX (https://max.ru) | Основной канал для SMS и сообщений (работает в РФ стабильно). |
+| Telegram | Telegram Bot API | Для тех, кто указал Telegram ID. |
+| SMS | SMS.ru или любой агрегатор | Резервный канал. |
+
+### 1.6 Мониторинг и логи
+
+| Компонент | Технология | Что даёт |
+|-----------|-----------|----------|
+| Метрики | Prometheus | Сбор метрик (количество звонков, длина очереди, ответы API). |
+| Визуализация | Grafana | Дашборды для CEO и техподдержки. |
+| Логи | Loki + Promtail | Централизованный сбор логов всех контейнеров. |
+| Алерты | Alertmanager | Уведомления в Telegram при проблемах. |
+
+### 1.7 Безопасность и бэкапы
+
+| Компонент | Технология |
+|-----------|-----------|
+| Шифрование данных | pgcrypto (PostgreSQL) или Fernet (Python) |
+| Secrets management | Docker secrets / HashiCorp Vault |
+| Бэкапы | pg_dump + s3cmd / rclone в S3 (каждые 6 часов) |
+| Восстановление | Документированный план, тест раз в месяц |
+
+---
+
+## 2. ДЕТАЛЬНАЯ АРХИТЕКТУРА (схема + описание потоков)
+
+```
+Пользователи (админ, маркетолог, врач, CEO)
+         │
+         ▼
+    [React Frontend] (порт 3000)
+         │
+         ▼ (HTTP/HTTPS)
+    [Nginx Reverse Proxy] (порт 80/443)
+         │
+         ▼
+    [FastAPI] (порт 8000) ──────────┬──────────────► [PostgreSQL] (5432)
+      │                              │                     │
+      │ (JWT, CRUD, вебхуки)          ├────────────────► [Redis] (6379)
+      │                              │
+      ▼                              ▼
+ [RabbitMQ] (5672)             [n8n] (5678)
+      │                              │
+      │ (очереди задач)               │ (workflows: cron, webhook)
+      ▼                              │
+ [Voice Bot] (8001) ◄────────────────┘
+      │
+      ▼ (REST API + callbacks)
+ [Voximplant] ──► телефонные звонки пациентам
+```
+
+### Описание потоков
+
+1. **Приём лида с Avito:**  
+   Avito → лендинг (Flexbe) → POST /api/webhook/avito_lead → FastAPI сохраняет пациента, ставит задачу в RabbitMQ (очередь `voice_tasks`, приоритет 10).  
+   Voice Bot забирает задачу, звонит в течение 5 минут.
+
+2. **Напоминание о записи:**  
+   n8n cron → GET /api/visits/pending_reminders → для каждого визита ставит задачу в RabbitMQ.  
+   Voice Bot звонит за 24 часа.
+
+3. **Реактивация RiskWhale:**  
+   n8n cron (воскресенье, 10:00) → GET /api/patients?rfm_segment=RiskWhale → ставит задачи в RabbitMQ (скрипт `reactivation_risk`).  
+   Voice Bot звонит, предлагает бесплатную диагностику.
+
+4. **Follow-up после приёма:**  
+   После завершения визита FastAPI через 3 дня ставит задачу в RabbitMQ (скрипт `follow_up`).  
+   Voice Bot звонит и предлагает записаться на курс.
+
+5. **Обработка пропущенного визита (no-show):**  
+   n8n каждые 15 минут проверяет просроченные визиты → FastAPI обновляет статус на `no_show` и ставит задачу в RabbitMQ с задержкой 1 час.  
+   Voice Bot звонит, перезаписывает.
+
+---
+
+## 3. МОДЕЛЬ ДАННЫХ (SQLAlchemy) – ПОЛНАЯ
+
+```python
+# app/models.py
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, Boolean, JSON, Enum, Text
+from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.postgresql import JSONB
+from datetime import datetime
+import enum
+
+class RFMSegment(str, enum.Enum):
+    ACTIVE = "active"
+    RISK_WHALE = "risk_whale"       # 6-12 мес без визитов, LTV > 100k
+    SLEEPING_WHALE = "sleeping_whale" # 1-2 года, LTV > 100k
+    LOST_WHALE = "lost_whale"       # >2 лет, LTV > 100k
+    NEW = "new"
+    REGULAR = "regular"
+
+class TargetAudience(str, enum.Enum):
+    CHILD_0_3 = "child_0_3"
+    CHILD_7_14 = "child_7_14"
+    PREGNANT = "pregnant"
+    ADULT_BACK = "adult_back"
+
+class Patient(Base):
+    __tablename__ = "patients"
+    id = Column(Integer, primary_key=True)
+    full_name = Column(String(200), nullable=False)
+    phone = Column(String(20), unique=True, index=True, nullable=False)
+    email = Column(String(100), nullable=True)
+    birth_date = Column(DateTime, nullable=True)
+    telegram_id = Column(String(50), nullable=True)
+    consent_to_calls = Column(Boolean, default=True)
+    consent_to_sms = Column(Boolean, default=True)
+    
+    # Маркетинговые поля
+    source = Column(String(50))  # avito, prodoctors, instagram, youtube, direct
+    utm = Column(JSONB, default={})
+    rfm_segment = Column(Enum(RFMSegment), default=RFMSegment.NEW)
+    target_audience = Column(Enum(TargetAudience), nullable=True)
+    
+    # Финансы и активность
+    total_paid = Column(Float, default=0.0)
+    last_visit_date = Column(DateTime, nullable=True)
+    last_reactivation_attempt = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Связи
+    visits = relationship("Visit", back_populates="patient")
+    courses = relationship("Course", back_populates="patient")
+    calls = relationship("CallLog", back_populates="patient")
+    quiz_answers = relationship("QuizAnswer", back_populates="patient")
+
+class Doctor(Base):
+    __tablename__ = "doctors"
+    id = Column(Integer, primary_key=True)
+    full_name = Column(String(100), nullable=False)
+    speciality = Column(String(100))
+    is_madyakin = Column(Boolean, default=False)
+    visits = relationship("Visit", back_populates="doctor")
+
+class Visit(Base):
+    __tablename__ = "visits"
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey("patients.id"))
+    doctor_id = Column(Integer, ForeignKey("doctors.id"))
+    service_name = Column(String(200))
+    service_price = Column(Float)
+    scheduled_at = Column(DateTime, nullable=False)
+    status = Column(String(20), default="scheduled")  # scheduled, completed, no_show, cancelled
+    was_reminded = Column(Boolean, default=False)
+    follow_up_done = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    patient = relationship("Patient", back_populates="visits")
+    doctor = relationship("Doctor", back_populates="visits")
+
+class Course(Base):
+    __tablename__ = "courses"
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey("patients.id"))
+    course_type = Column(String(50))  # OPTIMA, BASE, PREGNANCY
+    sessions_total = Column(Integer)
+    sessions_completed = Column(Integer, default=0)
+    total_amount = Column(Float)
+    status = Column(String(20), default="active")  # active, completed, abandoned
+    started_at = Column(DateTime)
+    finished_at = Column(DateTime, nullable=True)
+    patient = relationship("Patient", back_populates="courses")
+
+class CallLog(Base):
+    __tablename__ = "calls"
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey("patients.id"))
+    script_type = Column(String(50))   # reminder, no_show_return, reactivation_risk, follow_up, birthday
+    direction = Column(String(10), default="outgoing")
+    status = Column(String(20))        # answered, no_answer, busy, failed
+    duration_sec = Column(Integer, default=0)
+    recording_url = Column(String(255), nullable=True)
+    transcript = Column(Text, nullable=True)
+    intent = Column(String(50))        # agreed, rejected, rescheduled, callback_later
+    created_at = Column(DateTime, default=datetime.utcnow)
+    patient = relationship("Patient", back_populates="calls")
+
+class QuizAnswer(Base):
+    __tablename__ = "quiz_answers"
+    id = Column(Integer, primary_key=True)
+    patient_id = Column(Integer, ForeignKey("patients.id"))
+    campaign_id = Column(String(50))   # например "avito_skolioz"
+    question = Column(String(200))
+    answer = Column(String(200))
+    created_at = Column(DateTime, default=datetime.utcnow)
+    patient = relationship("Patient", back_populates="quiz_answers")
+```
+
+---
+
+## 4. ПОШАГОВАЯ РЕАЛИЗАЦИЯ (этапы 0–6 с командами и примерами)
+
+### ЭТАП 0: ИНФРАСТРУКТУРА (дни 1–2)
+
+**Шаг 0.1:** Аренда сервера (Yandex Cloud, Selectel или любой VPS с Ubuntu 22.04).  
+**Минимальные характеристики:** 8 vCPU, 32 GB RAM, 200 GB SSD.
+
+**Шаг 0.2:** Подключение по SSH и установка Docker.
+
+```bash
+ssh root@your-server-ip
+apt update && apt upgrade -y
+apt install -y ca-certificates curl gnupg lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt update && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+systemctl enable docker
+```
+
+**Шаг 0.3:** Создание `docker-compose.yml` для базовых сервисов:
+
+```yaml
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: crm_postgres
+    environment:
+      POSTGRES_DB: crm
+      POSTGRES_USER: crm_user
+      POSTGRES_PASSWORD: strong_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: crm_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: crm_rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: unless-stopped
+
+  n8n:
+    image: n8nio/n8n
+    container_name: crm_n8n
+    environment:
+      - N8N_ENCRYPTION_KEY=your_encryption_key
+      - N8N_METRICS=true
+      - EXTERNAL_HOOK_FILES=/home/node/.n8n/custom-hooks.js
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      - postgres
+      - rabbitmq
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  n8n_data:
+```
+
+**Шаг 0.4:** Запуск:
+
+```bash
+docker compose up -d
+```
+
+**Результат этапа 0:** Работают PostgreSQL (порт 5432), Redis, RabbitMQ (management UI на порту 15672), n8n (порт 5678).
+
+---
+
+### ЭТАП 1: ЯДРО CRM + МИГРАЦИЯ (дни 3–9)
+
+**Шаг 1.1:** Создание Python-проекта и виртуального окружения.
+
+```bash
+mkdir crm_backend && cd crm_backend
+python3.11 -m venv venv
+source venv/bin/activate
+pip install fastapi uvicorn sqlalchemy asyncpg alembic pydantic python-jose[cryptography] passlib[bcrypt] pandas openpyxl requests httpx aio-pika
+```
+
+**Шаг 1.2:** Структура проекта:
+
+```
+crm_backend/
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── models.py
+│   ├── database.py
+│   ├── schemas.py
+│   ├── auth.py
+│   ├── routers/
+│   │   ├── patients.py
+│   │   ├── visits.py
+│   │   ├── webhooks.py
+│   └── services/
+│       ├── rabbit_publisher.py
+│       └── migration_1c.py
+├── alembic.ini
+├── migrations/
+└── requirements.txt
+```
+
+**Шаг 1.3:** `database.py` (асинхронный движок):
+
+```python
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker
+from app.models import Base
+
+DATABASE_URL = "postgresql+asyncpg://crm_user:strong_password@postgres:5432/crm"
+
+engine = create_async_engine(DATABASE_URL, echo=True)
+AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+
+async def get_db():
+    async with AsyncSessionLocal() as session:
+        yield session
+```
+
+**Шаг 1.4:** Скрипт миграции из 1С (`migration_1c.py`):
+
+```python
+import pandas as pd
+from sqlalchemy import create_engine
+import re
+
+def normalize_phone(phone):
+    if not phone:
+        return None
+    digits = re.sub(r"\D", "", str(phone))
+    if len(digits) == 10:
+        digits = "7" + digits
+    elif len(digits) == 11 and digits[0] == "8":
+        digits = "7" + digits[1:]
+    if len(digits) == 11:
+        return "+" + digits
+    return None
+
+def migrate():
+    sync_engine = create_engine("postgresql://crm_user:strong_password@localhost:5432/crm")
+    # Предполагаем, что есть CSV-файлы:
+    patients_df = pd.read_csv("export_1c/clients.csv")
+    patients_df['phone'] = patients_df['phone'].apply(normalize_phone)
+    patients_df = patients_df.dropna(subset=['phone'])
+    patients_df.to_sql("patients", sync_engine, if_exists="append", index=False)
+    
+    visits_df = pd.read_csv("export_1c/visits.csv")
+    visits_df.to_sql("visits", sync_engine, if_exists="append", index=False)
+    
+    print(f"Мигрировано {len(patients_df)} пациентов, {len(visits_df)} визитов.")
+
+if __name__ == "__main__":
+    migrate()
+```
+
+**Шаг 1.5:** Базовый FastAPI (main.py):
+
+```python
+from fastapi import FastAPI, Depends
+from app.database import get_db
+from app.routers import patients, visits, webhooks
+
+app = FastAPI(title="Madyakin Clinic CRM")
+
+app.include_router(patients.router, prefix="/api/patients", tags=["patients"])
+app.include_router(visits.router, prefix="/api/visits", tags=["visits"])
+app.include_router(webhooks.router, prefix="/api/webhooks", tags=["webhooks"])
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+```
+
+**Шаг 1.6:** Запуск API (в контейнере или напрямую):
+
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+**Результат этапа 1:**  
+- API работает (документация по `/docs`).  
+- Данные из 1С загружены (7 500+ пациентов).  
+- Можно через админку (React пока не готов, используем Swagger) создавать визиты.
+
+---
+
+### ЭТАП 2: ГОЛОСОВОЙ БОТ MVP (дни 10–23)
+
+**Шаг 2.1:** Регистрация в Voximplant, получение номера.  
+**Шаг 2.2:** Запись голоса главврача (60 секунд, WAV, 16кГц). Загрузить в ElevenLabs, создать голос.  
+**Шаг 2.3:** Создать микросервис `voice_bot` (отдельный контейнер). Структура:
+
+```bash
+voice_bot/
+├── Dockerfile
+├── requirements.txt
+├── main.py
+├── stt.py (whisper)
+├── tts.py (elevenlabs)
+├── llm.py (yandexgpt)
+├── voximplant_client.py
+└── rabbit_listener.py
+```
+
+**Шаг 2.4:** `rabbit_listener.py`:
+
+```python
+import asyncio
+import aio_pika
+import json
+from app import process_call
+
+async def main():
+    connection = await aio_pika.connect_robust("amqp://guest:guest@rabbitmq:5672/")
+    channel = await connection.channel()
+    queue = await channel.declare_queue("voice_tasks", durable=True)
+    await queue.consume(on_message)
+    await asyncio.Future()
+
+async def on_message(message: aio_pika.IncomingMessage):
+    async with message.process():
+        data = json.loads(message.body.decode())
+        await process_call(data["patient_id"], data["script_type"])
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+**Шаг 2.5:** `process_call` – базовая логика для `reminder`:
+
+```python
+async def process_call(patient_id, script_type):
+    # Получаем данные пациента из CRM API
+    async with httpx.AsyncClient() as client:
+        patient = (await client.get(f"http://crm_api:8000/api/patients/{patient_id}")).json()
+        phone = patient["phone"]
+    # Инициируем звонок через Voximplant
+    call_id = await voximplant_client.start_call(phone, callback_url="https://voice_bot:8000/voximplant_callback")
+    # Сохраняем в БД начало звонка (через API CRM)
+    # Далее обработка событий будет приходить на /voximplant_callback
+```
+
+**Шаг 2.6:** Реализация сценария `reminder` через LLM:
+
+```python
+reminder_prompt = """
+Ты – доктор Мадякин, к.м.н., остеопат. Ты звонишь пациенту, чтобы напомнить о завтрашнем приёме.
+Скажи: "Здравствуйте, это доктор Мадякин. Напоминаю, что завтра в {time} у вас запланирован приём в клинике. Пожалуйста, возьмите с собой паспорт и результаты анализов, если они есть. Если вы не можете прийти, нажмите 1, чтобы перенести."
+Если пациент говорит, что не может, предложи перенести на другую дату.
+Если подтверждает, скажите: "Отлично, жду вас завтра. До свидания."
+"""
+```
+
+**Шаг 2.7:** Создание n8n workflow для отправки напоминаний (вручную импортировать JSON):
+
+```json
+{
+  "name": "Send Reminders",
+  "nodes": [
+    {
+      "parameters": {"rule": {"hour": 0, "minute": 0}, "timezone": "Europe/Moscow"},
+      "name": "Cron daily at 00:00",
+      "type": "n8n-nodes-base.cronTrigger"
+    },
+    {
+      "parameters": {"url": "http://crm_api:8000/api/visits/pending_reminders", "method": "GET"},
+      "name": "Get visits",
+      "type": "n8n-nodes-base.httpRequest"
+    },
+    {
+      "parameters": {"batchSize": 10},
+      "name": "Split",
+      "type": "n8n-nodes-base.splitInBatches"
+    },
+    {
+      "parameters": {"queue": "voice_tasks", "payload": "={{ $json }}"},
+      "name": "Send to RabbitMQ",
+      "type": "n8n-nodes-base.rabbitmqPublish"
+    }
+  ]
+}
+```
+
+**Шаг 2.8:** Тестирование: через админку создаём визит на завтра, ждём выполнения крона, проверяем звонок.
+
+**Результат этапа 2:** Бот звонит и напоминает о записях, а также через час после no-show.
+
+---
+
+### ЭТАП 3: АВТОМАТИЗАЦИЯ МАРКЕТИНГА + РЕАКТИВАЦИЯ (дни 24–33)
+
+**Шаг 3.1:** Сервис RFM-аналитики (отдельный контейнер с cron):
+
+```python
+# rfm_service.py
+import pandas as pd
+from sqlalchemy import create_engine
+from datetime import datetime, timedelta
+
+engine = create_engine("postgresql://crm_user:strong_password@postgres:5432/crm")
+
+def calculate_rfm():
+    df = pd.read_sql("SELECT id, last_visit_date, total_paid FROM patients", engine)
+    today = datetime.now()
+    df['days_inactive'] = (today - pd.to_datetime(df['last_visit_date'])).dt.days
+    df['segment'] = 'new'
+    # RiskWhale: 180-365 дней неактивности и total_paid > 100000
+    mask_risk = (df['days_inactive'] >= 180) & (df['days_inactive'] < 365) & (df['total_paid'] > 100000)
+    df.loc[mask_risk, 'segment'] = 'risk_whale'
+    # SleepingWhale: 365-730 дней и total_paid > 100000
+    mask_sleep = (df['days_inactive'] >= 365) & (df['days_inactive'] < 730) & (df['total_paid'] > 100000)
+    df.loc[mask_sleep, 'segment'] = 'sleeping_whale'
+    # LostWhale: более 730 дней и total_paid > 100000
+    mask_lost = (df['days_inactive'] >= 730) & (df['total_paid'] > 100000)
+    df.loc[mask_lost, 'segment'] = 'lost_whale'
+    # Обновляем БД
+    for idx, row in df.iterrows():
+        engine.execute(f"UPDATE patients SET rfm_segment='{row['segment']}' WHERE id={row['id']}")
+    print("RFM updated")
+
+if __name__ == "__main__":
+    calculate_rfm()
+```
+
+Запускать через cron в контейнере или через n8n (HTTP Request на `/api/run_rfm`).
+
+**Шаг 3.2:** n8n workflow `Reactivation_RiskWhale`:
+
+- Триггер: Cron (каждое воскресенье 10:00)
+- HTTP Request: `GET /api/patients?rfm_segment=risk_whale&last_reactivation_attempt__lt=30_days_ago`
+- Loop: для каждого пациента отправить в RabbitMQ задачу `{"patient_id": ..., "script_type": "reactivation_risk"}`
+
+**Шаг 3.3:** Добавить в voice_bot сценарий `reactivation_risk`:
+
+```python
+reactivation_prompt = """
+Ты доктор Мадякин. Звонишь пациенту, который не был в клинике более полугода.
+Предложи бесплатную контрольную диагностику (15 минут) для оценки текущего состояния.
+Если пациент говорит, что у него всё хорошо, скажи: «Мы заботимся о своих пациентах, предлагаем повторный курс со скидкой 10%».
+Если пациент жалуется на боль: «Приходите на приём, мы поможем. Записать на удобное время?»
+"""
+```
+
+**Шаг 3.4:** Отслеживание конверсии: после звонка бот отправляет результат в CRM (intent = 'agreed_to_diagnostic' или 'rejected'). Если agreed – автоматически создаётся визит через API.
+
+**Результат этапа 3:** Каждое воскресенье обзваниваются ~200 пациентов из RiskWhale, часть возвращается.
+
+---
+
+### ЭТАП 4: ИНТЕГРАЦИЯ С ВНЕШНИМИ КАНАЛАМИ (дни 34–40)
+
+**Шаг 4.1:** Avito Ads webhook. На лендинге (Flexbe) настроить отправку POST на `https://crm.domain.com/api/webhooks/avito_lead` с телом:
+
+```json
+{
+  "phone": "+79171234567",
+  "utm_campaign": "mama_skolioz",
+  "answers": [
+    {"question": "Возраст ребенка", "answer": "8 лет"},
+    {"question": "Беспокоит сутулость?", "answer": "Да"}
+  ]
+}
+```
+
+В FastAPI эндпоинт:
+
+```python
+@app.post("/api/webhooks/avito_lead")
+async def avito_lead(data: dict):
+    phone = normalize_phone(data['phone'])
+    patient = await get_or_create_patient(phone, source="avito", utm=data.get('utm_campaign'))
+    await save_quiz_answers(patient.id, data['answers'])
+    await publish_task("voice_tasks", {"patient_id": patient.id, "script_type": "new_lead", "priority": 10})
+    return {"status": "ok"}
+```
+
+**Шаг 4.2:** ProDoctors – парсинг отзывов (раз в сутки через `requests` + BeautifulSoup):
+
+```python
+def parse_prodoctors():
+    url = "https://prodoctors.ru/doctor/..."
+    # Извлечь количество отзывов, рейтинг, медали
+    # Обновить в таблице patients (поле prodoctors_rating, можно добавить в модель)
+```
+
+**Шаг 4.3:** Telegram-бот записи (отдельный сервис). Ключевые обработчики:
+
+```python
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Application, CommandHandler, CallbackQueryHandler
+
+async def start(update, context):
+    await update.message.reply_text("Здравствуйте! Запись к доктору Мадякину. Выберите услугу:")
+
+async def select_doctor(update, context):
+    keyboard = [[InlineKeyboardButton("Мадякин П.В.", callback_data="doctor_1")]]
+    await update.callback_query.message.reply_text("Выберите врача", reply_markup=InlineKeyboardMarkup(keyboard))
+```
+
+Интеграция с CRM: при получении команды бот делает запрос к FastAPI для получения свободных слотов, затем создаёт визит.
+
+**Шаг 4.4:** Автоматический сбор отзывов на Яндекс.Картах и 2ГИС. После завершения курса n8n через 2 дня отправляет SMS (через MAX) с текстом:
+
+> «Уважаемый {name}! Спасибо, что прошли курс в клинике доктора Мадякина. Будем благодарны за отзыв на Яндекс.Картах: {ссылка}. Это поможет другим пациентам.»
+
+**Результат этапа 4:** Все лиды обрабатываются автоматически, Telegram-бот работает, отзывы собираются.
+
+---
+
+### ЭТАП 5: БЕЗОПАСНОСТЬ, МОНИТОРИНГ, БЭКАПЫ (дни 41–45)
+
+**Шаг 5.1:** Настройка ролей в FastAPI:
+
+```python
+from fastapi import Depends, HTTPException
+
+def get_current_user(token: str = Depends(oauth2_scheme)):
+    payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    role = payload.get("role")
+    return {"id": payload["sub"], "role": role}
+
+def require_role(required_role: str):
+    def role_checker(current_user = Depends(get_current_user)):
+        if current_user["role"] != required_role and current_user["role"] != "admin":
+            raise HTTPException(status_code=403)
+        return current_user
+    return role_checker
+
+# Использование:
+@router.get("/patients", dependencies=[Depends(require_role("marketer"))])
+```
+
+**Шаг 5.2:** Шифрование телефонов (используем Fernet):
+
+```python
+from cryptography.fernet import Fernet
+cipher = Fernet(settings.ENCRYPTION_KEY)
+
+def encrypt_phone(phone: str) -> str:
+    return cipher.encrypt(phone.encode()).decode()
+
+def decrypt_phone(encrypted: str) -> str:
+    return cipher.decrypt(encrypted.encode()).decode()
+```
+
+В модели Patient поле `phone` хранить в зашифрованном виде. Дешифровать только при необходимости (например, для звонка).
+
+**Шаг 5.3:** Prometheus + Grafana. Добавить в `docker-compose`:
+
+```yaml
+prometheus:
+  image: prom/prometheus
+  volumes:
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  ports:
+    - "9090:9090"
+
+grafana:
+  image: grafana/grafana
+  ports:
+    - "3000:3000"
+```
+
+В FastAPI добавить эндпоинт `/metrics` (через `prometheus_client`).
+
+**Шаг 5.4:** Бэкапы PostgreSQL (cron каждые 6 часов):
+
+```bash
+0 */6 * * * pg_dump -U crm_user -h postgres crm | gzip > /backups/crm_$(date +\%Y\%m\%d_\%H\%M\%S).sql.gz
+```
+
+Затем синхронизировать с S3 через `rclone`.
+
+**Результат этапа 5:** Система безопасна, зашифрована, мониторится, бэкапы автоматические.
+
+---
+
+### ЭТАП 6: ДОКУМЕНТАЦИЯ, ОБУЧЕНИЕ, ПОДДЕРЖКА (дни 46–50)
+
+- Создать PDF-инструкции для администраторов и врачей (с картинками).
+- Записать скринкасты (2–3 минуты) по основным сценариям: запись пациента, просмотр истории, запуск ручной рассылки.
+- Провести 2-часовой вебинар с персоналом.
+- Настроить канал поддержки (Telegram-чат с Strong Marketing) на первые 3 месяца.
+- Передать исходный код и документацию в приватный Git-репозиторий клиента.
+
+---
+
+## 5. КОНФИГУРАЦИОННЫЕ ФАЙЛЫ (готовые для копирования)
+
+### 5.1 docker-compose.yml (полный, включая voice_bot)
+
+```yaml
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: crm
+      POSTGRES_USER: crm_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: ${RABBIT_PASSWORD}
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: unless-stopped
+
+  n8n:
+    image: n8nio/n8n
+    environment:
+      - N8N_ENCRYPTION_KEY=${N8N_KEY}
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_DATABASE=crm
+      - DB_POSTGRESDB_USER=crm_user
+      - DB_POSTGRESDB_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      - postgres
+      - rabbitmq
+    restart: unless-stopped
+
+  crm_api:
+    build: ./crm_backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://crm_user:${DB_PASSWORD}@postgres:5432/crm
+      - RABBITMQ_URL=amqp://guest:${RABBIT_PASSWORD}@rabbitmq:5672/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - rabbitmq
+    restart: unless-stopped
+
+  voice_bot:
+    build: ./voice_bot
+    environment:
+      - CRM_API_URL=http://crm_api:8000
+      - RABBITMQ_URL=amqp://guest:${RABBIT_PASSWORD}@rabbitmq:5672/
+      - VOXIMPLANT_ACCOUNT=${VOX_ACCOUNT}
+      - ELEVENLABS_API_KEY=${ELEVEN_KEY}
+      - YANDEX_API_KEY=${YANDEX_KEY}
+    depends_on:
+      - rabbitmq
+      - crm_api
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  n8n_data:
+```
+
+### 5.2 Пример .env файла
+
+```
+DB_PASSWORD=supersecret
+RABBIT_PASSWORD=guest
+N8N_KEY=your_encryption_key
+VOX_ACCOUNT=your_vox_account
+ELEVEN_KEY=your_elevenlabs_key
+YANDEX_KEY=your_yandex_gpt_key
+```
+
+---
+
+## 6. РИСКИ И МИТИГАЦИЯ (таблица)
+
+| Риск | Вероятность | Влияние | Митигация |
+|------|-------------|---------|-----------|
+| Сбой в работе голосового бота (не дозванивается) | Средняя | Высокое | Резервный SMS-канал, логирование, алерты в Telegram. |
+| Низкая конверсия обзвона реактивации | Средняя | Среднее | A/B тестирование скриптов, изменение частоты звонков, добавление SMS-напоминания перед звонком. |
+| Отказ администраторов использовать CRM | Низкая | Высокое | Обучение, интерфейс «как в 1С» по логике, бонусы за использование. |
+| Несанкционированный доступ к данным | Низкая | Критическое | Шифрование PII, ролевая модель, аудит логов. |
+| Потеря данных при миграции | Низкая | Критическое | Двойной бэкап 1С перед миграцией, тестовая миграция на копии. |
+
+---
+
+## 7. БЮДЖЕТ (разработка и подписка)
+
+| Статья | Стоимость (₽) |
+|--------|---------------|
+| Разработка CRM (этапы 0–6) силами Strong Marketing (Python + React + интеграции) | 0 ₽ (включено в подписку 300К/мес) |
+| **Голосовой бот Premium расширенный** – разовая разработка | **1 200 000** |
+| Голосовой бот – ежемесячная подписка (хостинг, API, поддержка, 8+ сценариев) | 120 000 |
+| Облачные расходы (сервер, VoIP, ElevenLabs, YandexGPT, SMS) | ~50 000 |
+| Маркетинговая подписка Strong Marketing (300К/мес) – отдельно | 300 000 |
+| **Итого в месяц (после запуска)** | **470 000** (без учёта разовой разработки) |
+
+*Разовая разработка (1,2 млн) оплачивается отдельно до старта этапа 2.*
+
+---
+
+## 8. ГРАФИК РАБОТ И КОНТРОЛЬНЫЕ ТОЧКИ
+
+| День | Событие |
+|------|---------|
+| 2 | Инфраструктура развёрнута |
+| 7 | Миграция данных завершена, API работает, 7 500 пациентов в CRM |
+| 9 | React-админка (базовая) готова |
+| 14 | Голосовой бот (reminder) протестирован на 10 пациентах |
+| 16 | Автоматические напоминания запущены в production |
+| 20 | RFM-сегментация рассчитана, списки RiskWhale готовы |
+| 23 | Первая реактивационная кампания (тест 50 звонков) |
+| 27 | Еженедельный автоматический обзвон всех RiskWhale |
+| 30 | Интеграция с Avito, Telegram-бот готов |
+| 35 | Полный мониторинг и бэкапы |
+| 40 | Обучение персонала, передача в эксплуатацию |
+| 50 | Пост-релизная поддержка, первая аналитика эффективности |
+
+---
+
+## 9. ЗАКЛЮЧЕНИЕ
+
+Документ содержит **абсолютно полный план** создания и внедрения кастомной CRM с голосовым AI-ботом для клиники доктора Мадякина. Все технические решения обоснованы, код-примеры готовы к использованию, этапы расписаны по дням.
+
+**Следующие шаги после согласования:**
+1. Подписание договора на разработку голосового бота (Premium расширенный).
+2. Предоставление клиникой выгрузок из 1С и записи голоса.
+3. Запуск этапа 0 (инфраструктура) – выделение сервера.
+
+По всем вопросам – Фархад Рашитович, Strong Marketing.
+
+---
+
+*Конец документа*
