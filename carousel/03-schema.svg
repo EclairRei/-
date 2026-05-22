@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDF6F0"/>
+      <stop offset="100%" stop-color="#F9E7E7"/>
+    </linearGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#D94F70"/>
+    </marker>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg3)"/>
+
+  <text x="540" y="100" font-family="Noto Sans" font-weight="700" font-size="54" fill="#2B1B2E" text-anchor="middle">Схема воркфлоу</text>
+  <rect x="440" y="120" width="200" height="5" rx="2.5" fill="#D94F70"/>
+  <text x="540" y="160" font-family="Noto Sans" font-weight="500" font-size="24" fill="#7A5566" text-anchor="middle">1 воркфлоу · 5 логических блоков</text>
+
+  <!-- sources -->
+  <g transform="translate(80, 220)">
+    <rect x="0" y="0" width="220" height="80" rx="16" fill="#FFFFFF" stroke="#D94F70" stroke-width="2"/>
+    <text x="110" y="50" font-family="Noto Sans" font-weight="600" font-size="26" fill="#2B1B2E" text-anchor="middle">🌐 Сайт</text>
+  </g>
+  <g transform="translate(80, 320)">
+    <rect x="0" y="0" width="220" height="80" rx="16" fill="#FFFFFF" stroke="#D94F70" stroke-width="2"/>
+    <text x="110" y="50" font-family="Noto Sans" font-weight="600" font-size="26" fill="#2B1B2E" text-anchor="middle">🟢 Avito</text>
+  </g>
+  <g transform="translate(80, 420)">
+    <rect x="0" y="0" width="220" height="80" rx="16" fill="#FFFFFF" stroke="#D94F70" stroke-width="2"/>
+    <text x="110" y="50" font-family="Noto Sans" font-weight="600" font-size="26" fill="#2B1B2E" text-anchor="middle">📦 WB</text>
+  </g>
+
+  <!-- arrows to webhook -->
+  <path d="M 300 260 Q 360 260 400 340" stroke="#D94F70" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+  <path d="M 300 360 L 400 360" stroke="#D94F70" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+  <path d="M 300 460 Q 360 460 400 380" stroke="#D94F70" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+
+  <!-- webhook -->
+  <g transform="translate(410, 320)">
+    <rect x="0" y="0" width="240" height="100" rx="16" fill="#B8A4D4" stroke="#9880B8" stroke-width="2"/>
+    <text x="120" y="45" font-family="Noto Sans" font-weight="700" font-size="24" fill="#FFFFFF" text-anchor="middle">🎯 Webhook</text>
+    <text x="120" y="75" font-family="Noto Sans" font-weight="500" font-size="20" fill="#FFFFFF" text-anchor="middle">один URL</text>
+  </g>
+
+  <path d="M 650 370 L 740 370" stroke="#D94F70" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+
+  <!-- normalize -->
+  <g transform="translate(750, 320)">
+    <rect x="0" y="0" width="240" height="100" rx="16" fill="#FFD4A8" stroke="#E8A87C" stroke-width="2"/>
+    <text x="120" y="45" font-family="Noto Sans" font-weight="700" font-size="24" fill="#2B1B2E" text-anchor="middle">🧹 Normalize</text>
+    <text x="120" y="75" font-family="Noto Sans" font-weight="500" font-size="20" fill="#2B1B2E" text-anchor="middle">Code node</text>
+  </g>
+
+  <!-- arrow down -->
+  <path d="M 870 420 L 870 490" stroke="#D94F70" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+
+  <!-- Sheets -->
+  <g transform="translate(80, 500)">
+    <rect x="0" y="0" width="260" height="100" rx="16" fill="#E4F5E4" stroke="#7FBF7F" stroke-width="2"/>
+    <text x="130" y="45" font-family="Noto Sans" font-weight="700" font-size="22" fill="#2B1B2E" text-anchor="middle">📋 Google Sheets</text>
+    <text x="130" y="75" font-family="Noto Sans" font-weight="500" font-size="20" fill="#2B1B2E" text-anchor="middle">справочник менеджеров</text>
+  </g>
+
+  <!-- select manager (centered) -->
+  <g transform="translate(410, 500)">
+    <rect x="0" y="0" width="320" height="100" rx="16" fill="#D94F70" stroke="#B33A5A" stroke-width="2"/>
+    <text x="160" y="45" font-family="Noto Sans" font-weight="700" font-size="24" fill="#FFFFFF" text-anchor="middle">🧠 Выбор менеджера</text>
+    <text x="160" y="75" font-family="Noto Sans" font-weight="500" font-size="20" fill="#FFFFFF" text-anchor="middle">регион · загрузка · fallback</text>
+  </g>
+
+  <!-- arrows: sheets -> select, normalize -> select -->
+  <path d="M 340 540 L 410 540" stroke="#D94F70" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+  <path d="M 870 420 L 870 450 Q 870 480 820 480 L 610 480 Q 570 480 570 500" stroke="#D94F70" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+
+  <!-- split -->
+  <path d="M 500 600 L 500 700 L 240 700 L 240 760" stroke="#D94F70" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+  <path d="M 640 600 L 640 700 L 860 700 L 860 760" stroke="#D94F70" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+
+  <!-- CRM -->
+  <g transform="translate(80, 770)">
+    <rect x="0" y="0" width="320" height="120" rx="16" fill="#FFFFFF" stroke="#D94F70" stroke-width="2"/>
+    <text x="160" y="55" font-family="Noto Sans" font-weight="700" font-size="26" fill="#2B1B2E" text-anchor="middle">💼 CRM</text>
+    <text x="160" y="90" font-family="Noto Sans" font-weight="500" font-size="20" fill="#7A5566" text-anchor="middle">amoCRM / Bitrix24</text>
+  </g>
+
+  <!-- Telegram -->
+  <g transform="translate(700, 770)">
+    <rect x="0" y="0" width="320" height="120" rx="16" fill="#FFFFFF" stroke="#D94F70" stroke-width="2"/>
+    <text x="160" y="55" font-family="Noto Sans" font-weight="700" font-size="26" fill="#2B1B2E" text-anchor="middle">💬 Telegram</text>
+    <text x="160" y="90" font-family="Noto Sans" font-weight="500" font-size="20" fill="#7A5566" text-anchor="middle">карточка + «Взял»</text>
+  </g>
+
+  <!-- footer -->
+  <text x="60" y="1030" font-family="Noto Sans" font-weight="500" font-size="22" fill="#7A5566">@lex_automata · #lex_cases</text>
+  <text x="1020" y="1030" font-family="Noto Sans" font-weight="700" font-size="22" fill="#D94F70" text-anchor="end">3 / 10</text>
+</svg>

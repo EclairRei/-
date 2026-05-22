@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <linearGradient id="bg8" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDF6F0"/>
+      <stop offset="100%" stop-color="#F9E7E7"/>
+    </linearGradient>
+    <linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5FB9E8"/>
+      <stop offset="100%" stop-color="#4A9BD0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg8)"/>
+
+  <!-- step badge -->
+  <g transform="translate(100, 100)">
+    <circle cx="0" cy="0" r="40" fill="#D94F70"/>
+    <text x="0" y="14" font-family="Noto Sans" font-weight="700" font-size="40" fill="#FFFFFF" text-anchor="middle">5</text>
+  </g>
+  <text x="160" y="115" font-family="Noto Sans" font-weight="700" font-size="44" fill="#2B1B2E">Сделка + уведомление</text>
+  <rect x="100" y="160" width="880" height="4" rx="2" fill="#D94F70"/>
+
+  <!-- left column: flow -->
+  <g transform="translate(80, 220)">
+    <rect x="0" y="0" width="420" height="720" rx="24" fill="#FFFFFF" opacity="0.75"/>
+
+    <text x="30" y="55" font-family="Noto Sans" font-weight="700" font-size="26" fill="#2B1B2E">Что происходит</text>
+    <line x1="30" y1="80" x2="390" y2="80" stroke="#F4B8C4" stroke-width="2"/>
+
+    <!-- step blocks -->
+    <g transform="translate(30, 110)">
+      <circle cx="20" cy="20" r="20" fill="#D94F70"/>
+      <text x="20" y="28" font-family="Noto Sans" font-weight="700" font-size="22" fill="#FFFFFF" text-anchor="middle">1</text>
+      <text x="60" y="20" font-family="Noto Sans" font-weight="700" font-size="22" fill="#2B1B2E">amoCRM / Bitrix24</text>
+      <text x="60" y="50" font-family="Noto Sans" font-weight="500" font-size="20" fill="#7A5566">создаём сделку на</text>
+      <text x="60" y="75" font-family="Noto Sans" font-weight="500" font-size="20" fill="#7A5566">assigned.amocrm_id</text>
+    </g>
+
+    <g transform="translate(30, 230)">
+      <circle cx="20" cy="20" r="20" fill="#D94F70"/>
+      <text x="20" y="28" font-family="Noto Sans" font-weight="700" font-size="22" fill="#FFFFFF" text-anchor="middle">2</text>
+      <text x="60" y="20" font-family="Noto Sans" font-weight="700" font-size="22" fill="#2B1B2E">Telegram → Send</text>
+      <text x="60" y="50" font-family="Noto Sans" font-weight="500" font-size="20" fill="#7A5566">Chat ID = telegram_id</text>
+      <text x="60" y="75" font-family="Noto Sans" font-weight="500" font-size="20" fill="#7A5566">parse_mode: HTML</text>
+    </g>
+
+    <g transform="translate(30, 350)">
+      <circle cx="20" cy="20" r="20" fill="#D94F70"/>
+      <text x="20" y="28" font-family="Noto Sans" font-weight="700" font-size="22" fill="#FFFFFF" text-anchor="middle">3</text>
+      <text x="60" y="20" font-family="Noto Sans" font-weight="700" font-size="22" fill="#2B1B2E">Inline-кнопка</text>
+      <text x="60" y="50" font-family="Noto Sans" font-weight="500" font-size="20" fill="#7A5566">callback_data:</text>
+      <text x="60" y="75" font-family="Noto Sans" font-weight="500" font-size="20" fill="#7A5566" font-family="monospace">take:{deal_id}</text>
+    </g>
+
+    <g transform="translate(30, 470)">
+      <circle cx="20" cy="20" r="20" fill="#D94F70"/>
+      <text x="20" y="28" font-family="Noto Sans" font-weight="700" font-size="22" fill="#FFFFFF" text-anchor="middle">4</text>
+      <text x="60" y="20" font-family="Noto Sans" font-weight="700" font-size="22" fill="#2B1B2E">Callback-воркфлоу</text>
+      <text x="60" y="50" font-family="Noto Sans" font-weight="500" font-size="20" fill="#7A5566">меняет статус в CRM</text>
+      <text x="60" y="75" font-family="Noto Sans" font-weight="500" font-size="20" fill="#7A5566">+ пост в общий чат</text>
+    </g>
+
+    <g transform="translate(30, 590)">
+      <rect x="0" y="0" width="360" height="100" rx="16" fill="#FFE4E4" stroke="#D94F70" stroke-width="2"/>
+      <text x="20" y="35" font-family="Noto Sans" font-weight="700" font-size="22" fill="#D94F70">🌸 Итог</text>
+      <text x="20" y="65" font-family="Noto Sans" font-weight="500" font-size="20" fill="#2B1B2E">Один клик — и сделка</text>
+      <text x="20" y="90" font-family="Noto Sans" font-weight="500" font-size="20" fill="#2B1B2E">официально в работе</text>
+    </g>
+  </g>
+
+  <!-- right column: phone mockup -->
+  <g transform="translate(540, 220)">
+    <!-- phone frame -->
+    <rect x="0" y="0" width="460" height="720" rx="48" fill="#2B1B2E"/>
+    <rect x="16" y="16" width="428" height="688" rx="32" fill="#17212B"/>
+
+    <!-- notch -->
+    <rect x="170" y="24" width="120" height="20" rx="10" fill="#2B1B2E"/>
+
+    <!-- header chat -->
+    <rect x="16" y="60" width="428" height="56" fill="#17212B"/>
+    <circle cx="50" cy="88" r="18" fill="#D94F70"/>
+    <text x="50" y="95" font-family="Noto Sans" font-weight="700" font-size="18" fill="#FFFFFF" text-anchor="middle">L</text>
+    <text x="82" y="84" font-family="Noto Sans" font-weight="600" font-size="18" fill="#FFFFFF">Leads Bot</text>
+    <text x="82" y="104" font-family="Noto Sans" font-weight="400" font-size="14" fill="#8FA3B3">в сети</text>
+
+    <!-- message bubble -->
+    <g transform="translate(40, 150)">
+      <rect x="0" y="0" width="380" height="480" rx="18" fill="#2B5278"/>
+
+      <text x="20" y="40" font-family="Noto Sans" font-weight="700" font-size="22" fill="#FFFFFF">🔔 Новый лид — AVITO</text>
+
+      <line x1="20" y1="60" x2="360" y2="60" stroke="#4A7BA8" stroke-width="1"/>
+
+      <text x="20" y="100" font-family="Noto Sans" font-weight="500" font-size="20" fill="#FFFFFF">👤 Мария К.</text>
+      <text x="20" y="140" font-family="Noto Sans" font-weight="500" font-size="20" fill="#FFFFFF">📞 +7 (495) 123-45-67</text>
+      <text x="20" y="180" font-family="Noto Sans" font-weight="500" font-size="20" fill="#FFFFFF">📍 Москва</text>
+      <text x="20" y="220" font-family="Noto Sans" font-weight="500" font-size="20" fill="#FFFFFF">🛍 Кофеварка Delonghi</text>
+
+      <text x="20" y="275" font-family="Noto Sans" font-weight="500" font-size="18" fill="#CDD6E8">💬 «есть в наличии?</text>
+      <text x="20" y="300" font-family="Noto Sans" font-weight="500" font-size="18" fill="#CDD6E8">доставка сегодня?»</text>
+
+      <text x="20" y="350" font-family="Noto Sans" font-weight="500" font-size="16" fill="#8FA3B3">⏱ 14:03 · 30 сек от заявки</text>
+
+      <!-- button -->
+      <g transform="translate(20, 390)">
+        <rect x="0" y="0" width="340" height="60" rx="12" fill="#3A95D9"/>
+        <text x="170" y="38" font-family="Noto Sans" font-weight="700" font-size="22" fill="#FFFFFF" text-anchor="middle">✅ Взял в работу</text>
+      </g>
+    </g>
+
+    <!-- home indicator -->
+    <rect x="175" y="680" width="110" height="5" rx="2.5" fill="#4A5A6A"/>
+  </g>
+
+  <!-- footer -->
+  <text x="60" y="1030" font-family="Noto Sans" font-weight="500" font-size="22" fill="#7A5566">@lex_automata · #lex_cases</text>
+  <text x="1020" y="1030" font-family="Noto Sans" font-weight="700" font-size="22" fill="#D94F70" text-anchor="end">8 / 10</text>
+</svg>

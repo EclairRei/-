@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDF6F0"/>
+      <stop offset="100%" stop-color="#F9E7E7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg2)"/>
+
+  <!-- header -->
+  <text x="540" y="110" font-family="Noto Sans" font-weight="700" font-size="54" fill="#2B1B2E" text-anchor="middle">Было → Стало</text>
+  <rect x="440" y="130" width="200" height="5" rx="2.5" fill="#D94F70"/>
+
+  <!-- BEFORE card -->
+  <g transform="translate(60, 200)">
+    <rect x="0" y="0" width="460" height="720" rx="28" fill="#FFE4E4" stroke="#E8A0A0" stroke-width="2"/>
+    <text x="230" y="75" font-family="Noto Sans" font-weight="700" font-size="40" fill="#B33A3A" text-anchor="middle">😭 Было</text>
+    <line x1="60" y1="110" x2="400" y2="110" stroke="#E8A0A0" stroke-width="2"/>
+
+    <text x="40" y="180" font-family="Noto Sans" font-weight="500" font-size="26" fill="#4A2B2B">❌ 3 источника —</text>
+    <text x="40" y="215" font-family="Noto Sans" font-weight="500" font-size="26" fill="#4A2B2B">всё валится старшему</text>
+
+    <text x="40" y="290" font-family="Noto Sans" font-weight="500" font-size="26" fill="#4A2B2B">❌ Руками раскидывает</text>
+    <text x="40" y="325" font-family="Noto Sans" font-weight="500" font-size="26" fill="#4A2B2B">по 5 менеджерам</text>
+
+    <text x="40" y="400" font-family="Noto Sans" font-weight="500" font-size="26" fill="#4A2B2B">❌ Лид висит час</text>
+
+    <text x="40" y="475" font-family="Noto Sans" font-weight="500" font-size="26" fill="#4A2B2B">❌ Клиент уже</text>
+    <text x="40" y="510" font-family="Noto Sans" font-weight="500" font-size="26" fill="#4A2B2B">у конкурента</text>
+
+    <g transform="translate(230, 620)">
+      <rect x="-160" y="-40" width="320" height="80" rx="40" fill="#B33A3A"/>
+      <text x="0" y="-2" font-family="Noto Sans" font-weight="700" font-size="28" fill="#FFFFFF" text-anchor="middle">Реакция:</text>
+      <text x="0" y="28" font-family="Noto Sans" font-weight="700" font-size="28" fill="#FFFFFF" text-anchor="middle">~ 1 час</text>
+    </g>
+  </g>
+
+  <!-- arrow between -->
+  <g transform="translate(540, 560)">
+    <circle cx="0" cy="0" r="44" fill="#D94F70"/>
+    <text x="0" y="14" font-family="Noto Sans" font-weight="700" font-size="42" fill="#FFFFFF" text-anchor="middle">➔</text>
+  </g>
+
+  <!-- AFTER card -->
+  <g transform="translate(560, 200)">
+    <rect x="0" y="0" width="460" height="720" rx="28" fill="#E4F5E4" stroke="#9FC99F" stroke-width="2"/>
+    <text x="230" y="75" font-family="Noto Sans" font-weight="700" font-size="40" fill="#2E7D32" text-anchor="middle">💃 Стало</text>
+    <line x1="60" y1="110" x2="400" y2="110" stroke="#9FC99F" stroke-width="2"/>
+
+    <text x="40" y="180" font-family="Noto Sans" font-weight="500" font-size="26" fill="#1E3A1E">✅ n8n сам выбирает</text>
+    <text x="40" y="215" font-family="Noto Sans" font-weight="500" font-size="26" fill="#1E3A1E">менеджера</text>
+
+    <text x="40" y="290" font-family="Noto Sans" font-weight="500" font-size="26" fill="#1E3A1E">✅ По региону</text>
+    <text x="40" y="325" font-family="Noto Sans" font-weight="500" font-size="26" fill="#1E3A1E">и загрузке</text>
+
+    <text x="40" y="400" font-family="Noto Sans" font-weight="500" font-size="26" fill="#1E3A1E">✅ Сделка в CRM +</text>
+    <text x="40" y="435" font-family="Noto Sans" font-weight="500" font-size="26" fill="#1E3A1E">пинг в Telegram</text>
+
+    <text x="40" y="510" font-family="Noto Sans" font-weight="500" font-size="26" fill="#1E3A1E">✅ Старший спит спокойно</text>
+
+    <g transform="translate(230, 620)">
+      <rect x="-180" y="-40" width="360" height="80" rx="40" fill="#2E7D32"/>
+      <text x="0" y="-2" font-family="Noto Sans" font-weight="700" font-size="28" fill="#FFFFFF" text-anchor="middle">Реакция:</text>
+      <text x="0" y="28" font-family="Noto Sans" font-weight="700" font-size="28" fill="#FFFFFF" text-anchor="middle">30 секунд 🎯</text>
+    </g>
+  </g>
+
+  <!-- footer -->
+  <text x="60" y="1030" font-family="Noto Sans" font-weight="500" font-size="22" fill="#7A5566">@lex_automata · #lex_cases</text>
+  <text x="1020" y="1030" font-family="Noto Sans" font-weight="700" font-size="22" fill="#D94F70" text-anchor="end">2 / 10</text>
+</svg>

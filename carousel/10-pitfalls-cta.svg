@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <linearGradient id="bg10" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDF6F0"/>
+      <stop offset="100%" stop-color="#F9D7D7"/>
+    </linearGradient>
+    <linearGradient id="cta" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D94F70"/>
+      <stop offset="100%" stop-color="#B8A4D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg10)"/>
+
+  <!-- header -->
+  <text x="540" y="100" font-family="Noto Sans" font-weight="700" font-size="48" fill="#2B1B2E" text-anchor="middle">🔒 Грабли</text>
+  <rect x="440" y="120" width="200" height="5" rx="2.5" fill="#D94F70"/>
+
+  <!-- pitfalls list -->
+  <g transform="translate(60, 170)">
+    <rect x="0" y="0" width="960" height="500" rx="24" fill="#FFFFFF" opacity="0.85"/>
+
+    <g transform="translate(40, 60)">
+      <circle cx="20" cy="20" r="22" fill="#FFE4E4"/>
+      <text x="20" y="28" font-family="Noto Sans" font-size="26" text-anchor="middle">❌</text>
+      <text x="60" y="18" font-family="Noto Sans" font-weight="700" font-size="24" fill="#2B1B2E">Регион только по телефону</text>
+      <text x="60" y="48" font-family="Noto Sans" font-weight="500" font-size="22" fill="#5A3F4F">Код симки ≠ текущий город. Приоритет — явному полю формы</text>
+    </g>
+
+    <g transform="translate(40, 180)">
+      <circle cx="20" cy="20" r="22" fill="#FFE4E4"/>
+      <text x="20" y="28" font-family="Noto Sans" font-size="26" text-anchor="middle">❌</text>
+      <text x="60" y="18" font-family="Noto Sans" font-weight="700" font-size="24" fill="#2B1B2E">Считаем загрузку по всем сделкам</text>
+      <text x="60" y="48" font-family="Noto Sans" font-weight="500" font-size="22" fill="#5A3F4F">«Думающий полгода» ≠ свежий лид. Бери только последние 7 дней</text>
+    </g>
+
+    <g transform="translate(40, 300)">
+      <circle cx="20" cy="20" r="22" fill="#FFE4E4"/>
+      <text x="20" y="28" font-family="Noto Sans" font-size="26" text-anchor="middle">❌</text>
+      <text x="60" y="18" font-family="Noto Sans" font-weight="700" font-size="24" fill="#2B1B2E">Chat ID = @username</text>
+      <text x="60" y="48" font-family="Noto Sans" font-weight="500" font-size="22" fill="#5A3F4F">Для личек нужен числовой ID. Пусть менеджер напишет боту /start</text>
+    </g>
+
+    <g transform="translate(40, 420)">
+      <circle cx="20" cy="20" r="22" fill="#FFE4E4"/>
+      <text x="20" y="28" font-family="Noto Sans" font-size="26" text-anchor="middle">❌</text>
+      <text x="60" y="18" font-family="Noto Sans" font-weight="700" font-size="24" fill="#2B1B2E">Нет fallback-ветки</text>
+      <text x="60" y="48" font-family="Noto Sans" font-weight="500" font-size="22" fill="#5A3F4F">Если никто не подошёл — лид улетит в никуда. Всегда дубль старшему</text>
+    </g>
+  </g>
+
+  <!-- CTA block -->
+  <g transform="translate(60, 720)">
+    <rect x="0" y="0" width="960" height="240" rx="28" fill="url(#cta)"/>
+    <text x="480" y="65" font-family="Noto Sans" font-weight="700" font-size="32" fill="#FFFFFF" text-anchor="middle">Было полезно? 🔥 в комменты!</text>
+    <text x="480" y="115" font-family="Noto Sans" font-weight="500" font-size="24" fill="#FFE4E4" text-anchor="middle">Расскажи, как у тебя лиды разлетаются:</text>
+    <text x="480" y="150" font-family="Noto Sans" font-weight="500" font-size="24" fill="#FFE4E4" text-anchor="middle">руками, круговая, или уже автоматика? 🍵</text>
+
+    <g transform="translate(480, 200)">
+      <rect x="-180" y="-22" width="360" height="44" rx="22" fill="#FFFFFF"/>
+      <text x="0" y="10" font-family="Noto Sans" font-weight="700" font-size="22" fill="#D94F70" text-anchor="middle">🔖 СОХРАНИ · ПОДЕЛИСЬ</text>
+    </g>
+  </g>
+
+  <!-- footer -->
+  <text x="60" y="1030" font-family="Noto Sans" font-weight="500" font-size="22" fill="#7A5566">@lex_automata · #lex_n8n #lex_cases</text>
+  <text x="1020" y="1030" font-family="Noto Sans" font-weight="700" font-size="22" fill="#D94F70" text-anchor="end">10 / 10</text>
+</svg>

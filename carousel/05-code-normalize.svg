@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F9E7E7"/>
+      <stop offset="100%" stop-color="#E8D4E0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg5)"/>
+
+  <!-- header -->
+  <text x="540" y="90" font-family="Noto Sans" font-weight="700" font-size="40" fill="#2B1B2E" text-anchor="middle">Code node · Normalize</text>
+  <text x="540" y="130" font-family="Noto Sans" font-weight="500" font-size="22" fill="#7A5566" text-anchor="middle">приводим любой источник к единой карточке</text>
+
+  <!-- mac-style code window -->
+  <g transform="translate(70, 170)">
+    <rect x="0" y="0" width="940" height="820" rx="20" fill="#1E1E2E" stroke="#3A2E3E" stroke-width="2"/>
+
+    <!-- traffic lights -->
+    <circle cx="30" cy="30" r="10" fill="#FF5F56"/>
+    <circle cx="60" cy="30" r="10" fill="#FFBD2E"/>
+    <circle cx="90" cy="30" r="10" fill="#27C93F"/>
+
+    <!-- filename tab -->
+    <text x="870" y="36" font-family="Noto Sans" font-weight="500" font-size="18" fill="#B8A4D4" text-anchor="end">normalize.js</text>
+
+    <!-- code lines. Syntax: pink=keyword, orange=string, mint=function, cyan=property, gray=comment, white=default -->
+    <g font-family="monospace,Noto Sans" font-size="24" font-weight="500">
+      <!-- line 1 -->
+      <text x="30" y="100"><tspan fill="#F38BA8">const</tspan><tspan fill="#CDD6F4"> raw </tspan><tspan fill="#F38BA8">=</tspan><tspan fill="#CDD6F4"> $json;</tspan></text>
+      <!-- line 2 -->
+      <text x="30" y="135"><tspan fill="#F38BA8">const</tspan><tspan fill="#CDD6F4"> source </tspan><tspan fill="#F38BA8">=</tspan><tspan fill="#CDD6F4"> raw.source </tspan><tspan fill="#F38BA8">||</tspan><tspan fill="#94E2D5"> detect</tspan><tspan fill="#CDD6F4">(raw);</tspan></text>
+
+      <!-- blank line -->
+      <!-- line 4 -->
+      <text x="30" y="200"><tspan fill="#F38BA8">const</tspan><tspan fill="#CDD6F4"> lead </tspan><tspan fill="#F38BA8">=</tspan><tspan fill="#CDD6F4"> {</tspan></text>
+      <text x="60" y="235"><tspan fill="#89DCEB">source</tspan><tspan fill="#CDD6F4">,</tspan></text>
+      <text x="60" y="270"><tspan fill="#89DCEB">name</tspan><tspan fill="#CDD6F4">: </tspan><tspan fill="#A6E3A1">''</tspan><tspan fill="#CDD6F4">, </tspan><tspan fill="#89DCEB">phone</tspan><tspan fill="#CDD6F4">: </tspan><tspan fill="#A6E3A1">''</tspan><tspan fill="#CDD6F4">, </tspan><tspan fill="#89DCEB">region</tspan><tspan fill="#CDD6F4">: </tspan><tspan fill="#A6E3A1">''</tspan><tspan fill="#CDD6F4">,</tspan></text>
+      <text x="60" y="305"><tspan fill="#89DCEB">product</tspan><tspan fill="#CDD6F4">: </tspan><tspan fill="#A6E3A1">''</tspan><tspan fill="#CDD6F4">, </tspan><tspan fill="#89DCEB">message</tspan><tspan fill="#CDD6F4">: </tspan><tspan fill="#A6E3A1">''</tspan><tspan fill="#CDD6F4">,</tspan></text>
+      <text x="60" y="340"><tspan fill="#89DCEB">received_at</tspan><tspan fill="#CDD6F4">: </tspan><tspan fill="#F38BA8">new</tspan><tspan fill="#94E2D5"> Date</tspan><tspan fill="#CDD6F4">().</tspan><tspan fill="#94E2D5">toISOString</tspan><tspan fill="#CDD6F4">(),</tspan></text>
+      <text x="30" y="375"><tspan fill="#CDD6F4">};</tspan></text>
+
+      <!-- if site -->
+      <text x="30" y="440"><tspan fill="#F38BA8">if</tspan><tspan fill="#CDD6F4"> (source </tspan><tspan fill="#F38BA8">===</tspan><tspan fill="#A6E3A1"> 'site'</tspan><tspan fill="#CDD6F4">) {</tspan></text>
+      <text x="60" y="475"><tspan fill="#CDD6F4">lead.</tspan><tspan fill="#89DCEB">name</tspan><tspan fill="#CDD6F4">    </tspan><tspan fill="#F38BA8">=</tspan><tspan fill="#CDD6F4"> raw.name;</tspan></text>
+      <text x="60" y="510"><tspan fill="#CDD6F4">lead.</tspan><tspan fill="#89DCEB">phone</tspan><tspan fill="#CDD6F4">   </tspan><tspan fill="#F38BA8">=</tspan><tspan fill="#CDD6F4"> raw.phone;</tspan></text>
+      <text x="60" y="545"><tspan fill="#CDD6F4">lead.</tspan><tspan fill="#89DCEB">region</tspan><tspan fill="#CDD6F4">  </tspan><tspan fill="#F38BA8">=</tspan><tspan fill="#CDD6F4"> raw.city;</tspan></text>
+      <text x="60" y="580"><tspan fill="#CDD6F4">lead.</tspan><tspan fill="#89DCEB">product</tspan><tspan fill="#CDD6F4"> </tspan><tspan fill="#F38BA8">=</tspan><tspan fill="#CDD6F4"> raw.product;</tspan></text>
+      <text x="30" y="615"><tspan fill="#CDD6F4">}</tspan></text>
+
+      <!-- if avito -->
+      <text x="30" y="680"><tspan fill="#F38BA8">if</tspan><tspan fill="#CDD6F4"> (source </tspan><tspan fill="#F38BA8">===</tspan><tspan fill="#A6E3A1"> 'avito'</tspan><tspan fill="#CDD6F4">) {</tspan></text>
+      <text x="60" y="715"><tspan fill="#CDD6F4">lead.</tspan><tspan fill="#89DCEB">name</tspan><tspan fill="#CDD6F4">    </tspan><tspan fill="#F38BA8">=</tspan><tspan fill="#CDD6F4"> raw.author?.name;</tspan></text>
+      <text x="60" y="750"><tspan fill="#CDD6F4">lead.</tspan><tspan fill="#89DCEB">region</tspan><tspan fill="#CDD6F4">  </tspan><tspan fill="#F38BA8">=</tspan><tspan fill="#CDD6F4"> raw.item?.location?.name;</tspan></text>
+      <text x="30" y="785"><tspan fill="#CDD6F4">}</tspan></text>
+    </g>
+  </g>
+
+  <!-- footer -->
+  <text x="60" y="1030" font-family="Noto Sans" font-weight="500" font-size="22" fill="#7A5566">@lex_automata · #lex_cases</text>
+  <text x="1020" y="1030" font-family="Noto Sans" font-weight="700" font-size="22" fill="#D94F70" text-anchor="end">5 / 10</text>
+</svg>
